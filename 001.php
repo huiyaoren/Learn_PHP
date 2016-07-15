@@ -33,23 +33,23 @@ function solution_2($list){
 	// switch 实现
 	switch (floor($avg/10)) {
 		case 10:
-			$rank = "A";
-			break;
+		$rank = "A";
+		break;
 		case 9:
-			$rank = "A";
-			break;
+		$rank = "A";
+		break;
 		case 8:
-			$rank = "B";
-			break;
+		$rank = "B";
+		break;
 		case 7:
-			$rank = "C";
-			break;
+		$rank = "C";
+		break;
 		case 6:
-			$rank = "D";
-			break;
+		$rank = "D";
+		break;
 		default:
-			$rank = "E";
-			break;
+		$rank = "E";
+		break;
 	}
 	echo "总分：{$sum}，平均分：{$avg}，等级：{$rank}<br><br>";
 };
