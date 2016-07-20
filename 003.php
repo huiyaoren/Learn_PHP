@@ -9,6 +9,7 @@ function solution_1(){
 	echo '<br>';
 	echo '最大值：',max($arr),'<br>';
 	echo '最小值：',min($arr),'<br>';
+	echo '总和：',array_sum($arr);
 	echo '平均数：',array_sum($arr)/count($arr),'<br><br>';
 }
 solution_1();
