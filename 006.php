@@ -14,7 +14,7 @@ function delete_file($file){
 				// 递归删除文件内的文件或目录
 				delete_file($file."/".$filename); // ??
 			}
-		}
+		} 
 
 		// 删除目录
 		echo @rmdir($file);
@@ -50,11 +50,12 @@ function check_file($filename){
 	foreach ($dir as $key => $value) {
 		// var_dump(pathinfo($value));
 		header("Content-Type:text/html;charset=gb2312");
+		// iconv() // 转码
 		echo "<br>";
 
 		if(is_dir($filename."/".$value)){
 			$file_next = $filename."/".$value;
-			echo "<a onclick=\"window.location.href='file.php?next={$file_next}'\"";
+			echo "<a href='javascript:void(0);' onclick=\"window.location.href='006.php?next={$file_next}'\"";
 
 			// check_file($filename."/".$value); 
 
@@ -67,8 +68,13 @@ function check_file($filename){
 
 }
 
-
-check_file('./test');
+if($_GET[$next = 'next']){
+	// $a=@(10/0);
+	// error_log($php_errormsg);
+	check_file($_GET[$next = 'next']);
+}else{
+	check_file('./test');
+}
 
 
 ?>
