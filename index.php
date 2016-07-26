@@ -26,7 +26,7 @@ $content_menu_data = [
 
 
 $shop_list = [
-	[],
+	
 ];
 
 

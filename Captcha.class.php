@@ -46,7 +46,6 @@ Class Captcha {
 
 		return $this -> code;
 	}
-
 }
 
 

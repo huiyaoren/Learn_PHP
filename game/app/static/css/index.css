@@ -1,0 +1,1484 @@
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-family: 'Microsoft Yahei', sans-serif;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    font-size: 100px;
+}
+
+body {
+    font-size: 0;
+}
+
+button {
+    cursor: pointer;
+}
+
+@-webkit-keyframes roll_wheel {
+    from {
+    }
+    to {
+        -webkit-transform: rotate(1500deg)
+    }
+}
+
+#_main_loading_box img {
+    animation: roll_wheel 5s ease;
+}
+
+#_scene {
+    overflow: hidden;
+}
+
+#username-error {
+    width: 100%;
+    position: absolute;
+    color: black;
+    font-size: .12rem;
+    top: 95px;
+    left: 0;
+}
+
+#password-error {
+    width: 100%;
+    position: absolute;
+    color: black;
+    font-size: .12rem;
+    top: 185px;
+    left: 0;
+}
+
+#password1-error {
+    width: 100%;
+    position: absolute;
+    color: black;
+    font-size: .12rem;
+    top: 185px;
+    left: 0;
+}
+
+#password2-error {
+    width: 100%;
+    position: absolute;
+    color: black;
+    font-size: .12rem;
+    top: 280px;
+    left: 0;
+}
+
+/*
+---------------------------------------------------------------------*/
+
+#_login {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/SplashLG.jpg);
+    background-position: center;
+    /*background-size: 100% 100%;*/
+    background-size: cover;
+    text-align: center;
+}
+
+#_login_center {
+    width: 500px;
+    height: 100%;
+    margin: auto 0;
+    display: inline-block;
+}
+
+#_login_center_empty {
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle
+}
+
+#_login_center_box {
+    width: 96%;
+    height: 420px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    background-image: url(../img/login_box.png); /*todo 线性渐变 半透明 */
+    background-size: 100% 100%;
+}
+
+#_login_center_box > img {
+    margin-top: 30px;
+}
+
+#_login_center_box > img:nth-child(2) {
+    /*position: absolute;*/
+    /*top: 100px;*/
+    /*left: 156px;*/
+}
+
+#_login_center_box > img:nth-child(3) {
+    cursor: pointer;
+    /*position: absolute;*/
+    /*top: 250px;*/
+    /*left: 20px;*/
+}
+
+#_login_center_box > img:nth-child(4) {
+    cursor: pointer;
+    /*position: absolute;*/
+    /*top: 250px;*/
+    /*right: 20px;*/
+}
+
+#_login_center_box input[name='username'] {
+    width: 210px;
+    height: 35px;
+    background: rgba(255, 255, 0, 0);
+    color: white;
+    position: absolute;
+    top: 45px;
+    left: 172px;
+}
+
+#_login_center_box input[name='password'] {
+    width: 210px;
+    height: 35px;
+    background: rgba(255, 255, 0, 0);
+    color: white;
+    position: absolute;
+    top: 137px;
+    left: 172px;
+}
+
+/*
+---------------------------------------------------------------------*/
+
+#_sign {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/SplashLG.jpg);
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+}
+
+#_sign_center {
+    width: 500px;
+    height: 100%;
+    margin: auto 0;
+    display: inline-block;
+}
+
+#_sign_center_empty {
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle
+}
+
+#_sign_center_box {
+    width: 96%;
+    height: 420px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    background-image: url(../img/login_box.png); /*todo 线性渐变 半透明 */
+    background-size: 100% 100%;
+}
+
+#_sign_center_box > img {
+    margin-top: 30px;
+}
+
+#_sign_center_box > img:nth-child(4) {
+    cursor: pointer;
+}
+
+#_sign_center_box > img:nth-child(5) {
+    cursor: pointer;
+    position: absolute;
+    right: -200px;
+    top: -50px;
+}
+
+#_sign_center_box input {
+    background: rgba(255, 255, 0, 0);
+    left: 96px;
+    width: 289px;
+    height: 35px;
+}
+
+#_sign_center_box input[name='username'] {
+
+    color: white;
+    position: absolute;
+    top: 45px;
+}
+
+#_sign_center_box input[name='password1'] {
+
+    color: white;
+    position: absolute;
+    top: 137px;
+}
+
+#_sign_center_box input[name='password2'] {
+
+    color: white;
+    position: absolute;
+    top: 229px;
+}
+
+/*
+---------------------------------------------------------------------*/
+
+#_main {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/World1Background.jpg);
+    background-position: top center;
+    background-size: 100% 100%;
+    text-align: center;
+}
+
+#_main button {
+    background: rgba(0, 0, 0, 0);
+    position: relative;
+}
+
+#_main_up {
+    width: 100%;
+    height: 82%;
+    position: relative;
+}
+
+#_main_up button {
+    width: 95px;
+    height: 95px;
+
+    position: absolute;
+    top: 25px;
+}
+
+#_main_up button:nth-child(1) {
+    left: 30px;
+    background-image: url("../img/reBack.png");
+}
+
+#_main_up button:nth-child(2) {
+    right: 30px;
+    background-image: url("../img/set.png");
+
+}
+
+#_main_down button {
+    margin: 0 20px;
+    width: 263px;
+    height: 69px;
+    text-align: center;
+}
+
+#_main_down button h1 {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: 69px;
+    font-family: 'Microsoft Yahei', sans-serif;
+    /* todo 圆体 */
+    /*color: #fefa65;*/
+    color: black;
+    /* todo 字体外边填充 */
+}
+
+#_main_down button:nth-child(1) {
+    background-image: url("../img/button_blue.png");
+}
+
+#_main_down button:nth-child(2) {
+    background-image: url("../img/button_blue.png");
+}
+
+#_main_down button:nth-child(3) {
+    background-image: url("../img/button_red.png");
+}
+
+#_main_loading {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url(../img/loadBg.png);
+    background-size: 100% 100%;
+    background-position: center;
+    z-index: 10;
+}
+
+#_main_loading_empty {
+    width: 100%;
+    height: 80%;
+}
+
+#_main_loading_box {
+    position: relative;
+    width: 740px;
+    margin: 0 auto;
+}
+
+#_main_loading_box img {
+    position: absolute;
+    top: -50px;
+    left: 0;
+}
+
+#_main_loading_box meter {
+    width: 740px;
+    height: 20px;
+    border-radius: 10px;
+    border: solid 4px black;
+    overflow: hidden;
+}
+
+#_main_loading_box h1 {
+    margin-top: 20px;
+    font-size: 20px;
+    /* todo 字体描边 */
+}
+
+/*
+---------------------------------------------------------------------*/
+#_stage {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/SplashLG.jpg);
+    background-position: center;
+    background-size: 100% 100%;
+    text-align: center;
+    position: relative;
+}
+
+#_stage button {
+    width: 95px;
+    height: 95px;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/reBack.png);
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    z-index: 20;
+}
+
+#_stage_box {
+    width: 100%;
+    height: 100%;
+}
+
+#_stage_box_empty {
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#_stage_box_stage {
+    width: 100%;
+    height: 399px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#_stage_box_stage ._leftStage {
+    height: 275px;
+    position: absolute;
+    top: 62px;
+    left: 13%;
+    z-index: 5;
+}
+
+#_stage_box_stage ._middleStage {
+    height: 399px;
+    top: 0;
+    left: 21%;
+    position: absolute;
+    z-index: 10;
+}
+
+#_stage_box_stage ._rightStage {
+    height: 275px;
+    position: absolute;
+    top: 62px;
+    left: 49%;
+    z-index: 5;
+}
+
+#_stage_box_stage ._backStage {
+    height: 275px;
+    position: absolute;
+    top: 62px;
+    left: 31%;
+    z-index: 5;
+    display: none;
+
+}
+
+#_stage_box_stage img:nth-child(1) {
+    position: absolute;
+    top: 132px;
+    right: 40px;
+}
+
+#_stage_box_stage img:nth-child(2) {
+    position: absolute;
+    top: 132px;
+    left: 40px;
+}
+
+/*
+---------------------------------------------------------------------*/
+
+#_map {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/chooseBg.png);
+    background-position: center;
+    background-size: 100% 100%;
+    text-align: center;
+    position: relative;
+}
+
+#_map button {
+    width: 95px;
+    height: 95px;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/reBack.png);
+    position: absolute;
+    top: 25px;
+    right: 30px;
+}
+
+#_map_empty {
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#_map_box {
+    width: 710px;
+    height: 475px;
+    margin: 0 auto;
+    background-image: url(../img/miaasion.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#_map_box_map > div {
+    width: 110px;
+    height: 110px;
+    background-image: url(../img/stage/TrackThumbnails1.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 55px;
+
+}
+
+#_map_box_map > div > img:first-child {
+    width: 80px;
+    background: rgba(0, 0, 0, .7);
+
+    position: relative;
+    top: 40px;
+    left: 2px;
+    padding: 5px 15px;
+    z-index: 1;
+
+}
+
+#_map_box_map > div > img:nth-child(2) {
+    width: 110px;
+    position: relative;
+    top: -34px;
+    z-index: 2;
+}
+
+._map1 {
+    background-position: 0 0;
+    left: 59px;
+    bottom: 32px;
+}
+
+._map2 {
+    background-position: -112px 0;
+    left: 222px;
+    bottom: 80px;
+}
+
+._map3 {
+    background-position: -224px 0;
+    left: 55px;
+    bottom: 190px;
+}
+
+._map4 {
+    background-position: -335px 0;
+    left: 112px;
+    top: 48px;
+}
+
+._map5 {
+    background-position: -447px 0;
+    left: 200px;
+    top: 150px;
+}
+
+._map6 {
+    background-position: -559px 0;
+    left: 300px;
+    top: 60px;
+}
+
+._map7 {
+    background-position: -671px 0;
+    right: 160px;
+    top: 40px;
+}
+
+._map8 {
+    background-position: -783px 0;
+    right: 50px;
+    top: 120px;
+}
+
+._map9 {
+    background-position: -895px 0;
+    right: 138px;
+    top: 220px;
+}
+
+._map10 {
+    background-position: -1007px 0;
+    right: 80px;
+    bottom: 20px;
+}
+
+/*
+---------------------------------------------------------------------*/
+
+#_shop {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/SplashLG.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+#_shop_empty {
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#_shop_box {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#_shop_box_preview {
+    width: 285px;
+    height: 555px;
+
+    border-radius: 10px;
+    border: solid 4px black;
+
+    background: white;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+}
+
+#_shop_box_preview > img:nth-child(1) {
+    position: absolute;
+    top: -30px;
+    left: 20px;
+}
+
+#_shop_box_preview > h1 {
+    font-size: .3rem;
+    color: black;
+    margin-top: 40px;
+}
+
+#_shop_box_preview > div {
+    width: 255px;
+    height: 265px;
+    background-image: url(../img/login_box.png);
+    background-size: 100% 100%;
+    display: inline-block;
+    margin-top: 15px;
+    border: solid 2px black;
+}
+
+#_shop_box_preview > span {
+    width: 100%;
+    font-size: .25rem;
+    color: #ffc600;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 900;
+    -webkit-text-stroke: 2px black;
+}
+
+#_shop_box_preview > button:nth-child(5) {
+    width: 231px;
+    height: 61px;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/multiplayerGame.png);
+    background-size: 100% 100%;
+    margin-bottom: 10px;
+}
+
+#_shop_box_preview > button:nth-child(6) {
+    width: 231px;
+    height: 61px;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/topUp.png);
+    background-size: 100% 100%;
+}
+
+#_shop_box_shop {
+    width: 600px;
+    height: 555px;
+    border-radius: 10px;
+    border: solid 4px black;
+    background: white;
+    display: inline-block;
+    position: relative;
+}
+
+#_shop_box_shop > img {
+    position: absolute;
+
+}
+
+#_shop_box_shop > img:nth-child(1) {
+    top: -30px;
+    left: 100px;
+}
+
+#_shop_box_shop > img:nth-child(2) {
+    top: 60px;
+    left: 35px;
+}
+
+#_shop_box_shop > img:nth-child(3) {
+    top: 185px;
+    left: 35px;
+}
+
+#_shop_box_shop > img:nth-child(4) {
+    top: 315px;
+    left: 35px;
+}
+
+#_shop_box_shop > img:nth-child(5) {
+    top: 450px;
+    left: 35px;
+}
+
+#_shop_box_shop > img:nth-child(6) {
+    top: -25px;
+    right: -30px;
+}
+
+#_shop_box_shop > img:nth-child(2),
+#_shop_box_shop > img:nth-child(2):hover,
+#_shop_box_shop > img:nth-child(3):hover,
+#_shop_box_shop > img:nth-child(4):hover,
+#_shop_box_shop > img:nth-child(5):hover {
+    background-image: url(../img/login_box.png);
+    background-size: 100% 100%;
+    border: solid 2px black;
+
+}
+
+#_shop_box_shop > div {
+    width: 460px;
+    height: 500px;
+    border-radius: 10px;
+    border: solid 4px black;
+    margin-top: 35px;
+    margin-left: 100px;
+    background: white;
+}
+
+#_shop_box_shop > div > div {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    /*border: solid 4px black;*/
+    background: white;
+    margin: 5px auto 0;
+    background-image: url(../img/loadBg.png);
+    background-size: cover;
+    background-position: center center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    text-align: left;
+}
+
+._shopItem {
+
+    width: 130px;
+    height: 195px;
+    border-radius: 10px;
+    border: solid 4px black;
+    background: white;
+    margin: 2px 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    position: relative;
+}
+
+._shopItem > img {
+    width: 114px;
+    height: 88px;
+}
+
+._shopItem > h2 {
+    width: 100%;
+    font-size: .16rem;
+    color: black;
+    margin: 3px 0;
+}
+
+._shopItem > span {
+    height: 0;
+    width: 100%;
+    font-size: .16rem;
+    color: black;
+    margin: 5px 0;
+    display: inline-block;
+}
+
+._shopItem > button:nth-child(4) {
+    width: 62px;
+    height: 28px;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/shopButton.png);
+    position: absolute;
+    bottom: 10px;
+    left: 2px;
+}
+
+._shopItem > button:nth-child(5) {
+    width: 62px;
+    height: 28px;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/preview.png);
+    position: absolute;
+    bottom: 10px;
+    right: 2px;
+}
+
+._userItem {
+    width: 114px;
+    height: 88px;
+    /*width: 130px;*/
+    /*height: 195px;*/
+    /*border-radius: 10px;*/
+    /*border: solid 4px black;*/
+    /*background: white;*/
+    /*margin: 2px 5px;*/
+    margin: 15px 15px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    position: relative;
+}
+
+._userItem > img {
+    width: 114px;
+    height: 88px;
+}
+
+._userItem > img:nth-child(3) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+}
+
+._userItem > h2 {
+    width: 100%;
+    font-size: 0;
+    color: black;
+    margin: 3px 0;
+}
+
+._userItem > span {
+    height: 0;
+    width: 100%;
+    font-size: 0;
+    /*font-size: .16rem;*/
+    color: black;
+    margin: 5px 0;
+    display: inline-block;
+}
+
+._userItem > button:nth-child(4) {
+    width: 62px;
+    /*height: 28px;*/
+    height: 0;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/shopButton.png);
+    position: absolute;
+    bottom: 10px;
+    left: 2px;
+}
+
+._userItem > button:nth-child(5) {
+    width: 62px;
+    /*height: 28px;*/
+    height: 0;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/preview.png);
+    position: absolute;
+    bottom: 10px;
+    right: 2px;
+}
+
+/*
+---------------------------------------------------------------------*/
+
+#_result {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/consequenceBg.png);
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+#_result_up {
+    width: 100%;
+    height: 85%;
+    position: relative;
+}
+
+#_result_up p:nth-child(1) {
+    position: absolute;
+    width: 23%;
+    height: 18%;
+    /*background: black;*/
+    right: 14%;
+    top: 12%;
+}
+
+#_result_up p:nth-child(1) span {
+    display: inline-block;
+}
+
+#_result_up p:nth-child(1) span:nth-child(1) {
+    width: 100%;
+    font-size: 2.5vh;
+    color: white;
+    font-weight: 900;
+    -webkit-text-stroke: 1px black;
+    margin-top: 1%;
+}
+
+#_result_up p:nth-child(1) span:nth-child(2) {
+    width: 100%;
+    margin-top: 3%;
+    font-size: 4.5vh;
+    color: #f6bd1a;
+    font-weight: 900;
+    -webkit-text-stroke: 1px black;
+}
+
+#_result_up p:nth-child(1) span:nth-child(3) {
+
+    font-size: 7.5vh;
+    color: white;
+    font-weight: 900;
+    -webkit-text-stroke: 2px black;
+    position: absolute;
+    bottom: -80%;
+    left: 28%;
+}
+
+#_result_up p:nth-child(1) span:nth-child(4) {
+
+    font-size: 5vh;
+    color: red;
+    font-weight: 900;
+    -webkit-text-stroke: 2px black;
+    position: absolute;
+    bottom: -120%;
+    left: 29%;
+}
+#_result_up p:nth-child(1) span:nth-child(5) {
+
+    font-size: 7.5vh;
+    color: white;
+    font-weight: 900;
+    -webkit-text-stroke: 2px black;
+    position: absolute;
+    bottom: 25%;
+    left: -140%;
+}
+#_result_up p:nth-child(1) span:nth-child(6) {
+
+    font-size: 7.5vh;
+    color: white;
+    font-weight: 900;
+    -webkit-text-stroke: 2px black;
+    position: absolute;
+    bottom: -35%;
+    left: -220%;
+}
+#_result_up p:nth-child(1) span:nth-child(7) {
+
+    font-size: 7.5vh;
+    color: white;
+    font-weight: 900;
+    -webkit-text-stroke: 2px black;
+    position: absolute;
+    bottom: -35%;
+    left: -60%;
+}
+
+#_result_up p:nth-child(2) {
+    position: absolute;
+    width: 46%;
+    height: 8%;
+    /*background: black;*/
+    left: 15%;
+    bottom: 10%;
+}
+
+#_result_up p:nth-child(2) span {
+
+    font-size: 4.5vh;
+    color: #f6bd1a;
+    font-weight: 900;
+    -webkit-text-stroke: 2px black;
+}
+
+#_result_up p:nth-child(2) span:nth-child(1) {
+    position: absolute;
+    left: 5%;
+}
+
+#_result_up p:nth-child(2) span:nth-child(2) {
+}
+
+#_result_up p:nth-child(2) span:nth-child(3) {
+    position: absolute;
+    right: 5%;
+}
+
+#_result_up > img {
+    width: 35vmin;
+    position: absolute;
+}
+
+#_result_up > img:nth-child(3) {
+    top: 33%;
+    left: 11%;
+}
+
+#_result_up > img:nth-child(4) {
+    top: 27%;
+    left: 27%;
+}
+
+#_result_up > img:nth-child(5) {
+    top: 39%;
+    left: 44%;
+}
+
+#_result_up > img:nth-child(6) {
+    top: 50%;
+    left: 67%;
+}
+
+#_result_down {
+    width: 100%;
+}
+
+#_result_down > button {
+    width: 263px;
+    height: 69px;
+    background: rgba(0, 0, 0, 0);
+    margin: 0 20px;
+}
+
+#_result_down > button:nth-child(1) {
+    background-image: url(../img/reStart.png);
+}
+
+#_result_down > button:nth-child(2) {
+    background-image: url(../img/backIndex.png);
+}
+
+#_result_down > button:nth-child(3) {
+    background-image: url(../img/next.png);
+}
+
+/*
+---------------------------------------------------------------------*/
+
+#_repertory {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/SplashLG.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+#_repertory_empty {
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#_repertory_box {
+    transform: scale(1);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#_repertory_box_preview {
+    width: 285px;
+    height: 555px;
+
+    border-radius: 10px;
+    border: solid 4px black;
+
+    background: white;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+}
+
+#_repertory_box_preview > img:nth-child(1) {
+    position: absolute;
+    top: -30px;
+    left: 20px;
+}
+
+#_repertory_box_preview > div {
+    width: 255px;
+    height: 265px;
+    background-image: url(../img/login_box.png);
+    background-size: 100% 100%;
+    display: inline-block;
+    margin-top: 35px;
+    border: solid 2px black;
+}
+
+#_repertory_box_preview > span {
+    width: 100%;
+    font-size: .25rem;
+    color: white;
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 900;
+    -webkit-text-stroke: 1px black;
+}
+
+#_repertory_box_preview > button {
+    width: 231px;
+    height: 61px;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/backIndex.png);
+    background-size: 100% 100%;
+    margin-bottom: 10px;
+}
+
+#_repertory_box_shop {
+    width: 600px;
+    height: 555px;
+    border-radius: 10px;
+    border: solid 4px black;
+    background: white;
+    display: inline-block;
+    position: relative;
+}
+
+#_repertory_box_shop > img {
+    position: absolute;
+
+}
+
+#_repertory_box_shop > img:nth-child(1) {
+    top: -30px;
+    left: 100px;
+}
+
+#_repertory_box_shop > img:nth-child(2) {
+    top: 60px;
+    left: 35px;
+}
+
+#_repertory_box_shop > img:nth-child(3) {
+    top: 185px;
+    left: 35px;
+}
+
+#_repertory_box_shop > img:nth-child(4) {
+    top: 315px;
+    left: 35px;
+}
+
+#_repertory_box_shop > img:nth-child(5) {
+    top: 450px;
+    left: 35px;
+}
+
+#_repertory_box_shop > img:nth-child(2),
+#_repertory_box_shop > img:nth-child(2):hover,
+#_repertory_box_shop > img:nth-child(3):hover,
+#_repertory_box_shop > img:nth-child(4):hover,
+#_repertory_box_shop > img:nth-child(5):hover {
+    background-image: url(../img/login_box.png);
+    background-size: 100% 100%;
+    border: solid 2px black;
+
+}
+
+#_repertory_box_shop > div {
+    width: 460px;
+    height: 500px;
+    border-radius: 10px;
+    border: solid 4px black;
+    margin-top: 35px;
+    margin-left: 100px;
+    background: white;
+}
+
+#_repertory_box_shop > div > div {
+    width: 100%;
+    height: 100%;
+    /*border-radius: 10px;*/
+    /*border: solid 4px black;*/
+    background: white;
+    /*margin: 5px auto 0;*/
+    background-image: url(../img/loadBg.png);
+    background-size: 100% 100%;
+    overflow-y: scroll;
+    text-align: left;
+}
+
+/*
+---------------------------------------------------------------------*/
+
+#_game #cont_div {
+    position: absolute;
+    bottom: 35px;
+    left: 10px;
+    width: 100px;
+    height: 100px;
+    border: solid 1px black;
+    border-radius: 50px;
+    z-index: 100;
+}
+
+#_game #cont_div div {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+}
+
+#_game meter {
+    width: 500px;
+    height: 30px;
+    position: fixed;
+    top: 400px;
+    display: none;
+
+}
+
+#_game h1 {
+    font-size: .3rem;
+    display: none;
+}
+
+#_game_timer {
+    background-image: url(../img/timeBg.png);
+    background-size: 100% 100%;
+    width: 407px;
+    height: 68px;
+
+    position: fixed;
+    top: 3.5vh;
+    left: 20vw;
+}
+
+#_game_timer span:nth-child(1) {
+    font-size: .4rem;
+    position: absolute;
+    top: 18px;
+    left: 98px
+}
+
+#_game_timer span:nth-child(2) {
+    font-size: .4rem;
+    position: absolute;
+    top: 15px;
+    left: 267px
+}
+
+#_game_rank {
+    width: 141px;
+    height: 133px;
+
+    position: fixed;
+    top: 1vh;
+    left: 2.5vw;
+
+    background-image: url(../img/nowRanking.png);
+    background-size: 100% 100%;
+
+}
+
+#_game_rank div {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/1.png);
+    background-size: 56px 64px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#_game_coin {
+    position: fixed;
+    background-image: url(../img/nowMoney.png);
+    background-size: 100% 100%;
+    width: 240px;
+    height: 68px;
+    top: 4.6vh;
+    right: 11.5vw;
+    z-index: 11;
+
+}
+
+#_game_coin span {
+    font-size: .4rem;
+    position: absolute;
+    top: 13px;
+    left: 80px;
+}
+
+#_game_speedometer {
+    position: fixed;
+    background-image: url(../img/nospeed.png);
+    background-size: 100% 100%;
+    width: 218px;
+    height: 50px;
+    top: 20vh;
+    right: 11.5vw;
+}
+
+#_game_speedometer div {
+    max-width: 100%;
+    width: 0%;
+    height: 100%;
+    background-image: url(../img/Speed.png);
+    background-size: cover;
+    background-position: left;
+}
+
+#_game_stop {
+    position: fixed;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/stop.png);
+    background-size: 100% 100%;
+    width: 64px;
+    height: 62px;
+
+    top: 4.6vh;
+    right: 2vw;
+    z-index: 11;
+}
+
+#_game_start {
+    display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, 0);
+    background-image: url(../img/pause2.png);
+    background-size: 100% 100%;
+    width: 64px;
+    height: 62px;
+
+    top: 4.6vh;
+    right: 2vw;
+    z-index: 11;
+}
+
+
+#_countdown {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+#_countdown_empty {
+    width: 0;
+    height: 100%;
+
+    display: inline-block;
+    vertical-align: middle;
+
+}
+
+#_countdown_body {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#_countdown_body span {
+    font-size: 0.8rem;
+}
+
+._coin {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top:0px;
+    left:0px;
+    /* 漏泄 px 可能会导致move() 方法报错*/
+    background-image: url(../img/Coin.png);
+    -webkit-animation: coin 2s steps(1, start) infinite;
+    /* ?? step() */
+}
+
+._ice {
+    width: 1535px;
+    height: 150px;
+    position: absolute;
+    top:0px;
+    left:0px;
+    /* 漏泄 px 可能会导致move() 方法报错*/
+    background-image: url(../img/ice.png);
+}
+
+
+._sand {
+    width: 629px;
+    height: 114px;
+    position: absolute;
+    top:0px;
+    left:0px;
+    /* 漏泄 px 可能会导致move() 方法报错*/
+    background-image: url(../img/sand.png);
+}
+
+@-webkit-keyframes coin {
+    0% {
+        background-position: 0 0;
+    }
+    5.2% {
+        background-position: 60px 0;
+    }
+    10.5% {
+        background-position: 120px 0;
+    }
+    15.8% {
+        background-position: 180px 0;
+    }
+    21% {
+        background-position: 240px 0;
+    }
+    26.3% {
+        background-position: 300px 0;
+    }
+    31.5% {
+        background-position: 360px 0;
+    }
+    36.8% {
+        background-position: 420px 0;
+    }
+    42% {
+        background-position: 480px 0;
+    }
+    47.3% {
+        background-position: 540px 0;
+    }
+    52.6% {
+        background-position: 60px -60px;
+    }
+    57.8% {
+        background-position: 120px -60px;
+    }
+    63.1% {
+        background-position: 180px -60px;
+    }
+    68.4% {
+        background-position: 240px -60px;
+    }
+    73.6% {
+        background-position: 300px -60px;
+    }
+    78.86% {
+        background-position: 360px -60px;
+    }
+    84.1% {
+        background-position: 420px -60px;
+    }
+    89.4% {
+        background-position: 480px -60px;
+    }
+    94.7% {
+        background-position: 540px -60px;
+    }
+    99.9% {
+        background-position: 0 -60px;
+    }
+}
+
+._barrel {
+    /*width: 414px;*/
+    /*height: 274px;*/
+    width: 105px;
+    height: 70px;
+    position: absolute;
+    top:0px;
+    left:0px;
+    /* 漏泄 px 可能会导致move() 方法报错*/
+    background-image: url(../img/mutong1.png);
+    background-size: 100% 100%;
+    /* ?? step() */
+}
+

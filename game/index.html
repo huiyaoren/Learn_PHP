@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="app/static/css/index.css" rel="stylesheet">
+    <script src="app/static/js/jquery-1.12.0.min.js"></script>
+    <script src="app/static/js/Controller.js"></script>
+    <script src="app/static/js/Director.js"></script>
+    <script src="app/static/js/Speedometer.js"></script>
+    <script src="app/static/js/Map.js"></script>
+    <script src="app/static/js/Scene.js"></script>
+    <script src="app/static/js/Role.js"></script>
+    <script src="app/static/js/Database.js"></script>
+    <script src="app/static/js/Coin.js"></script>
+    <script src="app/static/js/Sand.js"></script>
+    <script src="app/static/js/Barrel.js"></script>
+    <script src="app/static/js/Ice.js"></script>
+    <script src="app/static/js/jquery.validate.js"></script>
+    <script src="app/static/js/messages_zh.js"></script>
+    <script>
+        $(function () {
+
+            var director = new Director($("#_scene"));
+            var loginScene = new LoginScene(); // todo 登陆一次后保留账号信息 不用再次输入
+            var signScene = new SignScene();
+            var mainScene = new MainScene();
+            var mapScene = new MapScene();
+            var shopScene = new ShopScene();
+            var gameScene = new GameScene();
+            var resultScene = new ResultScene();
+            var stageScene = new StageScene();
+            var repertorytScene = new RepertoryScene();
+
+            var db = openDatabase('db', 2, 'db', 1024 * 1024);
+            var user = new TB_User(db);
+            var biker = new TB_Biker(db);
+            var moto = new TB_Moto(db);
+            var wheel = new TB_Wheel(db);
+            var engine = new TB_Engine(db);
+
+
+//            var s = '[1, 1, 2, 2]';
+//            console.log(s);// todo
+//            console.log(eval(String(s)));// todo
+//            console.log('[' + String(eval(String(s)))+']');// todo
+
+//            user.drop();
+
+            user.create();
+
+            biker.drop();
+            biker.create();
+            biker.insert([2, '冲刺', '角色2', 0, 'biker/c2s.png', 'biker/c2.png', 'biker/cha2.png']);
+            biker.insert([3, '潜伏', '角色3', 200, 'biker/c3s.png', 'biker/c3.png', 'biker/cha3.png']);
+            biker.insert([4, '战吼', '角色4', 200, 'biker/c4s.png', 'biker/c4.png', 'biker/cha4.png']);
+            biker.insert([5, '嘲讽', '角色5', 200, 'biker/c5s.png', 'biker/c5.png', 'biker/cha5.png']);
+            biker.insert([6, '冲锋', '角色6', 200, 'biker/c6s.png', 'biker/c6.png', 'biker/cha6.png']);
+            biker.insert([7, '圣盾', '角色7', 200, 'biker/c7s.png', 'biker/c7.png', 'biker/cha7.png']);
+            biker.insert([8, '火球', '角色8', 200, 'biker/c8s.png', 'biker/c8.png', 'biker/cha8.png']);
+
+            moto.drop();
+            moto.create();
+            moto.insert([101, 100, '车身1', 0, 'moto/m1s.png', 'moto/m1.png']);
+            moto.insert([102, 105, '车身2', 100, 'moto/m2s.png', 'moto/m2.png']);
+            moto.insert([103, 110, '车身3', 200, 'moto/m3s.png', 'moto/m3.png']);
+            moto.insert([104, 115, '车身4', 300, 'moto/m4s.png', 'moto/m4.png']);
+
+            wheel.drop();
+            wheel.create();
+            wheel.insert([201, 100, '车轮1', 0, 'wheel/w1s.png', 'wheel/w1.png']);
+            wheel.insert([202, 105, '车轮2', 100, 'wheel/w2s.png', 'wheel/w2.png']);
+            wheel.insert([203, 110, '车轮3', 200, 'wheel/w3s.png', 'wheel/w3.png']);
+            wheel.insert([204, 115, '车轮4', 250, 'wheel/w4s.png', 'wheel/w4.png']);
+
+            engine.drop();
+            engine.create();
+            engine.insert([301, 100, '引擎1', 0, 'engine/engine1.png']);
+            engine.insert([302, 105, '引擎2', 100, 'engine/engine2.png']);
+            engine.insert([303, 110, '引擎3', 150, 'engine/engine3.png']);
+            engine.insert([304, 115, '引擎4', 200, 'engine/engine4.png']);
+            engine.insert([305, 120, '引擎5', 250, 'engine/engine5.png']);
+            engine.insert([306, 125, '引擎6', 300, 'engine/engine6.png']);
+
+
+            var save_list = [
+                [0, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+            ];
+
+            user.insert(['sdfsdf', 'sdfsdf', 'sdfsdf', 9999, 99, '[[2,3,4],[102,103],[202,203],[302,303]]', '[2,102,202,302]', JSON.stringify(save_list)]);
+
+//            console.log(JSON.parse(JSON.stringify(save_list)));
+
+
+// ---------------------------- -----------------------------------------------
+            localStorage.gameReady = false;
+
+            director.runScene(loginScene);
+
+            // 登陆
+            loginScene.bind("clickSignButton", function () {
+                director.runScene(signScene);
+            });
+
+            loginScene.bind("loginCorrect", function (e, form) {
+
+                var username = $(form).children("input[name=username]").val();
+                var password = $(form).children("input[name=password]").val();
+
+//                console.log(form)
+                user.select(['*', "username='" + username + "'"], function (result) {
+
+//                    console.log(result.rows);
+                    if (result.rows.length == 0) {
+
+                        alert("账号名不存在");
+
+                    } else {
+                        console.log("数据匹配用户名数量|登陆: " + result.rows.length);
+                        localStorage.userCoin = result.rows.item(0).coin;
+                        localStorage.userOwning = result.rows.item(0).owning_staff;
+                        localStorage.userUsing = result.rows.item(0).using_staff;
+                        localStorage.saveData = result.rows.item(0).record;
+                        // 验证密码
+                        console.log("用户数据库密码|登陆: " + result.rows.item(0).password);
+
+                        if (password == result.rows.item(0).password) {
+                            // todo 用户数据存至localstorage
+                            localStorage.userOnline = result.rows.item(0).username;
+                            alert('登陆成功');
+                            director.runScene(mainScene);
+                        } else {
+                            alert('密码错误');
+                            $(form).children("input[name=password]").val("")
+                        }
+                    }
+                });
+
+            });
+
+
+            // 注册
+            signScene.bind("returnToLogin", function () {
+                director.runScene(loginScene);
+            });
+
+            signScene.bind("signSuccess", function (e, form) {
+                var username = $(form).children("input[name=username]").val();
+                var password = $(form).children("input[name=password1]").val();
+
+
+                user.select(['*', "username='" + username + "'"], function (result) {
+
+                    console.log("查找用户名结果数|注册：" + result.rows.length);
+
+                    if (result.rows.length != 0) {
+                        alert("该账号名已被使用");
+                    }
+                    else if (result.rows.length == 0) {
+
+                        user.insert([
+                            username,
+                            password,
+                            username,
+                            1000,
+                            99,
+                            '[[2],[101],[201],[301]]',
+                            '[2, 102, 202, 302]',
+                            JSON.stringify(save_list)
+                        ]);
+                        alert("注册成功,将跳转至登陆界面");
+                        director.runScene(loginScene);
+                    }
+                });
+            });
+
+
+            // 主界面
+            mainScene.bind("clickShopButton", function () {
+                director.runScene(shopScene);
+            });
+
+            mainScene.bind("clickPlayButton", function () {
+                director.runScene(stageScene);
+            });
+
+            mainScene.bind("clickStorageButton", function () {
+                director.runScene(repertorytScene);
+            });
+
+            mainScene.bind("returnToLogin1", function () {
+                director.runScene(loginScene);
+                // todo 清空  localstorage
+            });
+
+
+            // 个人仓库
+            repertorytScene.bind("loadStorage", function (e, shop, preview) {
+                var username = localStorage.userOnline;
+                console.log("活动用户名|仓库：" + username);
+
+                function load_preview(fn, fn2) {
+
+                    user.select(['*', "username='" + username + "'"], function (result) {
+                        var using = eval(result.rows.item(0).using_staff);
+                        var user_biker = using[0];
+                        var user_moto = using[1];
+                        var user_wheel = using[2];
+                        var user_engine = using[3];
+
+                        console.log("用户已装备角色列表|仓库：" + user_biker);
+                        console.log("用户已装备车架列表|仓库：" + user_moto);
+                        console.log("用户已装备轮组列表|仓库：" + user_wheel);
+                        console.log("用户已装备引擎列表|仓库：" + user_engine);
+
+                        biker.select(['*', "id='" + user_biker + "'"], function (result_biker) {
+                            moto.select(['*', "id='" + user_moto + "'"], function (result_moto) {
+                                wheel.select(['*', "id='" + user_wheel + "'"], function (result_wheel) {
+                                    var results = [result_biker, result_moto, result_wheel];
+                                    var result_img = [];
+                                    for (var i = 0; i < results.length; i++) {
+                                        var img = results[i].rows.item(0).img_2;
+                                        result_img.push(img);
+                                    }
+                                    fn(result_img);
+                                    if (fn2) {
+                                        engine.select(['*', "id='" + user_engine + "'"], function (result_engine) {
+                                            results.push(result_engine);
+                                            fn2(result, results)
+                                        });
+                                    }
+                                })
+                            })
+
+                        })
+                    });
+                }
+
+                function load_item(result) {
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var $item = $('\
+                            <div class="_userItem" data-id="' + result.rows.item(i).id + '">\
+                                <h2>' + result.rows.item(i).name + '</h2>\
+                                <img src="app/static/img/' + result.rows.item(i).img_1 + '">\
+                                <img src="app/static/img/shopped.png">\
+                                <span>价格：' + result.rows.item(i).price + '</span>\
+                                <button></button>\
+                                <button></button>\
+                            </div>\
+                        ');
+                        var using = eval(localStorage.userUsing);
+                        for (var k = 0; k < using.length; k++) {
+                            if ($item.attr("data-id") == using[k]) {
+                                $item.children("img:eq(1)").show();
+                            }
+
+                        }
+
+                        // todo     选中功能
+                        $item.click(function () {
+                            var item_id = $(this).attr("data-id");
+
+                            //  显示红勾消失
+                            for (var m = 0; m < $(this).parent().children().length; m++) {
+                                $(this).parent().children(":eq(" + m + ")").children("img:eq(1)").hide();
+                            }
+                            $(this).children("img:eq(1)").show();
+
+//                            var using = eval(localStorage.userUsing);
+                            if (item_id < 100) {
+                                using[0] = item_id
+                            }
+                            else if (item_id < 200) {
+                                using[1] = item_id
+                            }
+                            else if (item_id < 300) {
+                                using[2] = item_id
+                            }
+                            else if (item_id < 400) {
+                                using[3] = item_id
+                            }
+
+                            // 修改用户装备数据
+                            var new_using = "[";
+                            for (var n = 0; n < using.length; n++) {
+                                new_using += using[n] + ','
+                            }
+                            new_using = new_using.slice(0, -1);
+                            new_using += "]";
+                            user.update(["using_staff= '" + new_using + "'", "username='" + username + "'"])
+
+
+                            // 预览角色与装备属性
+                            preview.children("div").empty();
+                            load_preview(
+                                    function (result_img) {
+                                        var role = new Role([
+                                            "app/static/img/" + result_img[1],
+                                            "app/static/img/" + result_img[0],
+                                            "app/static/img/" + result_img[2]
+                                        ], preview.children("div"));
+                                        role.run();
+                                        role.move(65, 115);
+                                    },
+                                    function (result, results) {// results [人，车，轮，机]
+                                        console.log(result, results);
+                                        preview.children("span:eq(3)").html("技能: " + results[0].rows.item(0).skill);
+                                        preview.children("span:eq(2)").html("最大速度: " + results[1].rows.item(0).max_speed);
+                                        preview.children("span:eq(1)").html("转向性能: " + results[2].rows.item(0).turning_speed);
+                                        preview.children("span:eq(0)").html("加速性能: " + results[3].rows.item(0).acceleration);
+
+                                    }
+                            );
+                        });
+
+                        $(shop).append($item);// todo
+                    }
+                }
+
+                // 载入用户已购 角色
+                repertorytScene.bind("loadUserRole", function () {
+                    user.select(['*', "username='" + username + "'"], function (result) {
+                        var user_biker = eval(result.rows.item(0).owning_staff)[0];
+
+                        console.log("用户已买角色列表|仓库：" + user_biker);
+                        $(shop).empty();
+                        for (var i = 0; i < user_biker.length; i++) {  // todo <
+                            biker.select(['*', "id='" + user_biker[i] + "'"], function (result) {
+//                            console.log(result.rows.item(i-1));// todo i-1
+                                load_item(result);
+                            })
+                        }
+                    });
+                });
+
+                // 载入用户已购 车身
+                repertorytScene.bind("loadUserMoto", function () {
+                    user.select(['*', "username='" + username + "'"], function (result) {
+                        var user_moto = eval(result.rows.item(0).owning_staff)[1];
+
+                        console.log("用户已买车身列表|仓库：" + user_moto);
+                        $(shop).empty();
+                        for (var i = 0; i < user_moto.length; i++) {  // todo <
+                            moto.select(['*', "id='" + user_moto[i] + "'"], function (result) {
+//                            console.log(result.rows.item(i-1));// todo i-1
+                                load_item(result);
+                            })
+                        }
+                    });
+                });
+
+                // 载入用户已购 车轮
+                repertorytScene.bind("loadUserWheel", function () {
+                    user.select(['*', "username='" + username + "'"], function (result) {
+                        var user_wheel = eval(result.rows.item(0).owning_staff)[2];
+
+                        console.log("用户已买车轮列表|仓库：" + user_wheel);
+                        $(shop).empty();
+                        for (var i = 0; i < user_wheel.length; i++) {  // todo <
+                            wheel.select(['*', "id='" + user_wheel[i] + "'"], function (result) {
+//                            console.log(result.rows.item(i-1));// todo i-1
+                                load_item(result);
+                            })
+                        }
+                    });
+                });
+
+                // 载入用户已购 引擎
+                repertorytScene.bind("loadUserEngine", function () {
+                    user.select(['*', "username='" + username + "'"], function (result) {
+                        var user_engine = eval(result.rows.item(0).owning_staff)[3];
+
+                        console.log("用户已买车轮列表|仓库：" + user_engine);
+                        $(shop).empty();
+                        for (var i = 0; i < user_engine.length; i++) {  // todo <
+                            engine.select(['*', "id='" + user_engine[i] + "'"], function (result) {
+//                            console.log(result.rows.item(i-1));// todo i-1
+                                load_item(result);
+                            })
+                        }
+                    });
+                });
+
+                // 载入角色 必须在事件定义后运行
+                $(shop).trigger("loadUserRole");
+
+
+                // 预览角色与装备属性
+                load_preview(
+                        function (result_img) {
+                            var role = new Role([
+                                "app/static/img/" + result_img[1],
+                                "app/static/img/" + result_img[0],
+                                "app/static/img/" + result_img[2]
+                            ], preview.children("div"));
+                            role.run();
+                            role.move(65, 115);
+                        },
+                        function (result, results) {// results [人，车，轮，机]
+                            console.log(result, results);
+                            preview.children("span:eq(3)").html("技能: " + results[0].rows.item(0).skill);
+                            preview.children("span:eq(2)").html("最大速度: " + results[1].rows.item(0).max_speed);
+                            preview.children("span:eq(1)").html("转向性能: " + results[2].rows.item(0).turning_speed);
+                            preview.children("span:eq(0)").html("加速性能: " + results[3].rows.item(0).acceleration);
+                            localStorage.max_speed = results[1].rows.item(0).max_speed
+                            localStorage.max_acc = results[3].rows.item(0).acceleration;
+                            localStorage.speed_y = results[2].rows.item(0).turning_speed;
+                        }
+                );
+
+
+            });
+
+            repertorytScene.bind("returnToMain_2", function () {
+                director.runScene(mainScene);
+            });
+
+            repertorytScene.bind("goToGame", function () {
+                director.runScene(gameScene);
+            });
+
+
+            // 商店
+            shopScene.bind("LoadShop", function (e, shop, preview) {
+//                alert(); //todo ?? 直接载入不执行 从主界面跳转才执行
+                var username = localStorage.userOnline;
+
+                // 预览
+                function load_preview(fn1, fn2) {
+                    user.select(['*', "username='" + username + "'"], function (result) {
+
+                        var using = eval(result.rows.item(0).using_staff);
+                        var user_biker = using[0];
+                        var user_moto = using[1];
+                        var user_wheel = using[2];
+                        var user_engine = using[3];
+
+                        console.log("用户已装备角色列表|仓库：" + user_biker);
+                        console.log("用户已装备车架列表|仓库：" + user_moto);
+                        console.log("用户已装备轮组列表|仓库：" + user_wheel);
+                        console.log("用户已装备引擎列表|仓库：" + user_engine);
+
+                        biker.select(['*', "id='" + user_biker + "'"], function (result_biker) {
+                            moto.select(['*', "id='" + user_moto + "'"], function (result_moto) {
+                                wheel.select(['*', "id='" + user_wheel + "'"], function (result_wheel) {
+                                    var results = [result_biker, result_moto, result_wheel];
+                                    var result_img = [];
+                                    for (var i = 0; i < results.length; i++) {
+                                        var img = results[i].rows.item(0).img_2;
+                                        result_img.push(img);
+                                    }
+                                    if (fn1) {
+                                        fn1(result_img);
+                                    }
+                                    ;
+                                    if (fn2) {
+                                        fn2(result)
+                                    }
+                                })
+                            })
+
+                        });
+
+
+                    });
+                }
+
+                // 生成商品项目
+                function load_item(result) {
+                    $(shop).empty();
+                    for (var i = 0; i < result.rows.length; i++) {
+//                        var $item = $("<div class='_shopItem'></div>")
+                        var $item = $('\
+                            <div class="_shopItem" data-id="' + result.rows.item(i).id + '">\
+                                <h2>' + result.rows.item(i).name + '</h2>\
+                                <img src="app/static/img/' + result.rows.item(i).img_1 + '">\
+                                <span>价格：' + result.rows.item(i).price + '</span>\
+                                <button></button>\
+                                <button></button>\
+                            </div>\
+                        ');
+
+                        // todo 已装备物品显示红叉
+//                        console.log($item[0]);
+
+                        // 购买单击事件
+                        $item.children("button:eq(0)").click(function () {
+                            var item_id = $(this).parent().attr("data-id");
+                            var item_price = $(this).parent().children("span").html().slice(3);
+                            // Chrome不再支持showModalDialog
+
+                            // 用户数据查找
+                            user.select(["*", "username='" + username + "'"], function (result) {
+                                localStorage.userCoin = result.rows.item(0).coin;
+                                localStorage.userOwning = result.rows.item(0).owning_staff;
+                                localStorage.userUsing = result.rows.item(0).using_staff;
+                                var owning = eval(result.rows.item(0).owning_staff);
+                                console.log(owning);
+
+                                // 是否已购买
+                                for (var i = 0; i < owning.length; i++) {
+                                    for (var j = 0; j < owning[i].length; j++) {
+                                        console.log(owning[i][j] == 2);
+                                        if (item_id == owning[i][j]) {
+                                            alert("已拥有该物品");
+                                            return null;
+                                        }
+                                    }
+                                }
+
+                                // 余额是否足够
+                                if (localStorage.userCoin - item_price < 0) {
+                                    alert("余额不足");
+                                    return null
+                                }
+
+                                // 弹框确认购买
+                                var conf = confirm("确认购买？");
+                                if (conf == false) {
+                                    return null;
+                                }
+
+                                // 根据id不同 存放至不同位置
+                                if (item_id < 100) {
+                                    owning[0].push(item_id)
+                                }
+                                else if (item_id < 200) {
+                                    owning[1].push(item_id)
+                                }
+                                else if (item_id < 300) {
+                                    owning[2].push(item_id)
+                                }
+                                else if (item_id < 400) {
+                                    owning[3].push(item_id)
+                                }
+
+
+                                // 处理数据转化成字符串
+                                var new_owning = "";
+                                new_owning += "[";
+                                for (var m = 0; m < owning.length; m++) {
+                                    new_owning += "[";
+                                    for (var n = 0; n < owning[m].length; n++) {
+                                        new_owning += owning[m][n] + ",";
+                                    }
+                                    new_owning = new_owning.slice(0, -1);
+                                    new_owning += "],";
+                                }
+                                new_owning = new_owning.slice(0, -1);
+                                new_owning += "]";
+//                                console.log(new_owning);
+
+                                // 修改用户剩余金额，已购列表
+                                user.update([
+                                    "coin =" + (localStorage.userCoin - item_price) + " ,owning_staff = '" + new_owning + "'",
+                                    "username='" + username + "'"
+                                ]);
+
+                                // 刷新本地储存的用户已购列表
+                                localStorage.userOwning = new_owning;
+
+                                // 重载预览界面
+                                load_preview(function (result_img) {
+                                    var role = new Role([
+                                        "app/static/img/" + result_img[1],
+                                        "app/static/img/" + result_img[0],
+                                        "app/static/img/" + result_img[2]
+                                    ], preview.children("div"));
+                                    role.run();
+                                    role.move(65, 115);
+                                }, function (result) {
+                                    preview.children("h1").html(result.rows.item(0).username);
+                                    preview.children("span").html("我的金币：" + result.rows.item(0).coin);
+                                });
+
+
+                                // 购买成功
+                                alert("购买成功")
+                            });
+                        });
+
+                        // 预览单击事件
+                        $item.children("button:eq(1)").click(function () {
+                            var item_id = $(this).parent().attr("data-id");
+
+                            load_preview(function (result_img) {
+                                var img_list = [
+                                    "app/static/img/" + result_img[1],
+                                    "app/static/img/" + result_img[0],
+                                    "app/static/img/" + result_img[2]
+                                ];
+
+                                // 预览
+                                if (item_id < 100) {
+                                    img_list[1] = "app/static/img/biker/c" + item_id + ".png"
+                                }
+                                else if (item_id < 200) {
+                                    img_list[0] = "app/static/img/moto/m" + (item_id - 100) + ".png"
+                                }
+                                else if (item_id < 300) {
+                                    img_list[2] = "app/static/img/wheel/w" + (item_id - 200) + ".png"
+                                }
+
+                                // 重建预览角色
+                                var role = new Role(img_list, preview.children("div"));
+                                preview.children("div").empty();
+                                role.run();
+                                role.move(65, 115);
+                            })
+                        });
+
+                        $(shop).append($item);// todo
+                    }
+                }
+
+//
+                // 切换商品标签
+                shopScene.bind("loadMotoItem", function () {
+                    moto.select(['*', 'id>0'], function (result) {
+                        console.log("查询结果数量|车身：" + result.rows.length);
+                        load_item(result);
+                    });
+                });
+
+                shopScene.bind("loadBikerItem", function () {
+                    biker.select(['*', 'id>0'], function (result) {
+                        console.log("查询结果数量|角色：" + result.rows.length);
+                        load_item(result);
+                    });
+                });
+
+                shopScene.bind("loadEngineItem", function () {
+                    engine.select(['*', 'id>0'], function (result) {
+                        console.log("查询结果数量|引擎：" + result.rows.length);
+                        load_item(result);
+                    });
+                });
+
+                shopScene.bind("loadWheelItem", function () {
+                    wheel.select(['*', 'id>0'], function (result) {
+                        console.log("查询结果数量|车轮：" + result.rows.length);
+                        load_item(result);
+                    });
+                });
+
+                $(shop).trigger("loadBikerItem");
+
+                // 预览
+                load_preview(function (result_img) {
+                    preview.children("div").empty();
+                    var role = new Role([
+                        "app/static/img/" + result_img[1],
+                        "app/static/img/" + result_img[0],
+                        "app/static/img/" + result_img[2]
+                    ], preview.children("div"));
+                    role.run();
+                    role.move(65, 115);
+                }, function (result) {
+                    preview.children("h1").html(result.rows.item(0).username);
+                    preview.children("span").html("我的金币：" + result.rows.item(0).coin);
+                });
+            });
+
+            shopScene.bind("returnToMain", function () {
+                director.runScene(mainScene);
+            });
+
+            shopScene.bind("goToStorage", function () {
+                director.runScene(repertorytScene)
+            });
+
+
+            // 赛事选择
+            stageScene.bind("returnToMain_3", function () {
+                director.runScene(mainScene)
+            });
+
+            stageScene.bind("chooseStage", function (e, stage_num) {
+                var username = localStorage.userOnline;
+                localStorage.stageNum = stage_num;
+                //todo
+                user.select(["*", "username='" + username + "'"], function (result) {
+//                    localStorage.userCoin = result.rows.item(0).coin;
+//                    localStorage.userOwning = result.rows.item(0).owning_staff;
+//                    localStorage.userUsing = result.rows.item(0).using_staff;
+                    localStorage.saveData = result.rows.item(0).record;
+                    localStorage.saveData_stage = JSON.stringify(JSON.parse(localStorage.saveData)[stage_num - 1]);
+                    director.runScene(mapScene)
+                });
+            });
+
+
+            // 赛段选择
+            mapScene.bind("loadMapScene", function (e, map) {
+
+                // 隐藏关卡锁定图片
+                for (var i = 0; i < $(map).children().length; i++) {
+                    $(map).children(":eq(" + i + ")").children("img:eq(1)").hide()
+                }
+
+
+                // 更黄图片 stageNUM
+                $(map).children("div").css("background-image", "url(app/static/img/stage/TrackThumbnails" + localStorage.stageNum + ".png)");
+
+                // 载入锁图片与星 saveData_stage
+                var save_stage = JSON.parse(localStorage.saveData_stage);
+                for (var j = 0; j < save_stage.length; j++) {
+
+                    if (save_stage[j] == -1) {
+                        $(map).children(":eq(" + j + ")").children("img:eq(1)").show()
+                    }
+                    else if (save_stage[j] == 0) {
+                        $(map).children(":eq(" + j + ")").children("img:eq(1)").hide();
+                        $(map).children(":eq(" + j + ")").children("img:eq(0)").attr("src", "app/static/img/bigStar0.png")
+                    }
+                    else if (save_stage[j] == 1) {
+                        $(map).children(":eq(" + j + ")").children("img:eq(1)").hide();
+                        $(map).children(":eq(" + j + ")").children("img:eq(0)").attr("src", "app/static/img/bigStar1.png")
+                    }
+                    else if (save_stage[j] == 2) {
+                        $(map).children(":eq(" + j + ")").children("img:eq(1)").hide();
+                        $(map).children(":eq(" + j + ")").children("img:eq(0)").attr("src", "app/static/img/bigStar2.png")
+                    }
+                    else if (save_stage[j] == 3) {
+                        $(map).children(":eq(" + j + ")").children("img:eq(1)").hide();
+                        $(map).children(":eq(" + j + ")").children("img:eq(0)").attr("src", "app/static/img/bigStar3.png")
+                    }
+
+                }
+
+                // todo 返回按钮
+            });
+
+            mapScene.bind("clickMap", function (e, map, map_num) {
+                localStorage.mapNum = map_num;
+                localStorage.gameReady = true;
+                director.runScene(repertorytScene);
+            });
+
+            mapScene.bind("returnToStage", function () {
+                director.runScene(stageScene);
+            });
+
+
+            // 游戏
+            gameScene.bind("goToResult", function () {
+                localStorage.gameReady = false;
+                director.runScene(resultScene);
+            });
+
+
+            // 结算
+            resultScene.bind("restartGame", function () {
+                director.runScene(gameScene);
+            });
+
+            resultScene.bind("returnToMain_4", function () {
+                director.runScene(mainScene);
+            });
+
+            resultScene.bind("changeRecord", function (e, roleRank) {
+                var username = localStorage.userOnline;
+                var mapNum = localStorage.mapNum - 1;
+                var stageNum = localStorage.stageNum - 1;
+                var record = JSON.parse(localStorage.saveData);
+                var rank = localStorage.result_roleRank;
+                var coin = localStorage.userCoin;
+
+                console.log(record[stageNum]);
+                record[stageNum][mapNum] = 4 - rank;
+
+
+                user.update([
+                    "coin =" + coin + " ,record = '" + JSON.stringify(record) + "'",
+                    "username='" + username + "'"
+                ]);
+                if (rank <= 3) {
+                    if (mapNum < 9) {
+                        var num = record[stageNum][mapNum + 1];
+                        record[stageNum][mapNum + 1] = num == -1 ? 0 : num;
+                    }
+                    else if (mapNum >= 9) {
+                        if (stageNum < 7) {
+                            var num = record[stageNum + 1][0];
+                            record[stageNum + 1][0] = num == -1 ? 0 : num;
+                        }
+                    }
+                    user.update([
+                        "coin =" + coin + " ,record = '" + JSON.stringify(record) + "'",
+                        "username='" + username + "'"
+                    ]);
+                }
+            });
+
+        })
+    </script>
+</head>
+<body>
+<div id="_scene" style="width: 100%; height: 100%"></div>
+</body>
+</html>
