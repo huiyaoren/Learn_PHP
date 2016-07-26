@@ -16,8 +16,10 @@ Class Captcha {
 		$this -> count = $count;
 	}
 
+
 	function create(){
-		header("content-type:image/png");
+		
+		// header("content-type:image/png");
 
 		$this -> img = imagecreate($this -> width, $this -> height);
 		$bgcolor = imagecolorallocate($this -> img,  mt_rand(0,100),  mt_rand(0, 100),  mt_rand(0, 100));
@@ -30,18 +32,21 @@ Class Captcha {
 			$this -> code .= $ch;
 			imagettftext($this -> img, 14, mt_rand(-50,50),  5+20*$i, 20, $textcolor, './SIMLI.TTF', $ch);
 		}
-		
+		// var_dump($this -> code);
 		imagepng($this -> img);
 
 	}
 
 	function __destruct(){
-		imagedestroy($this -> img);
+		// imagedestroy($this -> img);
 	}
 
 	function __tostring(){
+		// header("content-type:text");
+
 		return $this -> code;
 	}
+
 }
 
 

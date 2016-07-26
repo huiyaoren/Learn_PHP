@@ -1,4 +1,13 @@
-<?php
+ <?php
+
+
+$user_data = [
+	['usrnm' => 'admin', 'psw' => 'admin'],
+	['usrnm' => 'admin1', 'psw' => 'admin'],
+	['usrnm' => 'admin2', 'psw' => 'admin'],
+	['usrnm' => 'admin3', 'psw' => 'admin'],
+	['usrnm' => 'admin4', 'psw' => 'admin'],
+];
 
 
 $content_menu_data = [
@@ -16,7 +25,13 @@ $content_menu_data = [
 ];
 
 
+$shop_list = [
+	[],
+];
+
+
 function block_tag($tag, $attr="", $text=""){
+
 	return "<{$tag} {$attr}>{$text}</{$tag}>\n";
 }
 
@@ -48,8 +63,35 @@ function create_menu($list){
 	}
 }
 
+if($_COOKIE['user']['username']){
+	require 'view.php';
+	return false;
+}
 
+if($_POST['username'] and $_POST['password'] and $_POST['captcha']){
+	// todo 验证码验证 把验证码存在 session? localstorage?
+	if($_POST['captcha'] != $_COOKIE['captcha']){
+		require 'login.php';
+		echo "<h1>验证码不正确</h1>";
+		return false;
+	}
 
-require 'view.php';
+	// 账号密码验证
+	foreach ($user_data as $data) {
+		if($_POST['username'] == $data['usrnm'] and $_POST['password'] == $data['psw']){
+			// 用户名 存入 cookie
+			setcookie("user[username]", $_POST['username']);
+			require 'view.php';
+			$user_data_is_right = true;
+			break;
+		}
+	}
+	if($user_data_is_right != true){
+		echo "账号或密码错误 <a href='login.php'>返回<a>";
+	}
+}else{
+	require 'login.php';
+}
+
 
 ?>

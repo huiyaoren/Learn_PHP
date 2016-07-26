@@ -5,6 +5,8 @@
 
 if($file = $_FILES['file']){
 
+	// for($i=0;$i<count($file['name'];$i++)){
+	// }
 
 	echo "===================================","<br>";
 	echo "文件名：",$file['name'],"<br>";
@@ -15,13 +17,13 @@ if($file = $_FILES['file']){
 	echo "===================================","<br>";
 
 	if($file['error']!='0'){
-		echo "上传失败";
+		echo "上传失败<br><br>";
 		return;
 	}
 
 	move_uploaded_file($file["tmp_name"], "upload/".$file["name"]);
 
-	echo "上传成功<br>";
+	echo "上传成功<br><br>";
 	// error_log($php_erromsg);
 }
 
@@ -62,6 +64,7 @@ function find_config($file, $config){
 	}
 }
 // config($config);
+echo "name2 = ?<br>";
 find_config('config.txt', 'name2');
 
 ?>

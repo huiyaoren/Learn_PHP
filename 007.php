@@ -8,23 +8,26 @@
 			var type = file.value.split(".").pop();
 			var size = file.files[0].size;
 			// alert(size)
-			form.action="javascript:void(0);";
+			form.action = "javascript:void(0);";
 			// alert(type);
-			if(type !='jpg' && type && 'png' && type !='gif'){
+			if(type != 'jpg' && type != 'png' && type != 'gif'){
 				alert("只支持上传 jpg png gif 格式图片");
 				return;
 			}
-			else if(size>2*1024*1024){
+			else if(size > 2*1024*1024){
 				alert("文件大小不能超过2M");
 				return;
 			}
 			else{
-				form.action="007_upload.php";
+				form.action = "007_upload.php";
 			}
 		}
 	}
 </script>
 <form action="" method="post" enctype='multipart/form-data' >
 	<input type="file" name="file"/>
+	<br>
+	<!-- <input type="file" name="file[2]"/> -->
+	<br>
 	<input type="submit" />
 </form>

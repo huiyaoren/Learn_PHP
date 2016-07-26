@@ -92,6 +92,15 @@
 			left: -50px;
 		}
 
+		form{
+			position: relative;
+		}
+		form > img{
+			position: absolute;
+			top: 126px;
+			left: 170px;
+		}
+
     </style>
 </head>
 <body>
@@ -99,15 +108,20 @@
 		<div class="empty"></div>
 		<div class="login">
 			<h1>登陆</h1>
-			<form>
+			<form method='post' action='index.php?'>
 				<input type="text" name="username" placeholder=" 请输入账号"/>
 				<input type="password" name="password" placeholder=" 请输入密码"/>
 				<br>
 				<input type="text" name="captcha" placeholder=" 请输入验证码"/>
 				<img src="captcha.php" onclick = "this.src='captcha.php?'+ Math.random()" />
 				<br>
-				<input type="button" name="submit" value="登陆"/>
 
+				<input type="submit" name="submit" value="登陆"/>
+				<h1><?php
+					session_start();
+					// var_dump($_SESSION['captcha']);
+					echo $_SESSION['captcha'];
+				?></h1>
 			</form>
 		</div>
 	</div>
