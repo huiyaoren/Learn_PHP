@@ -17,6 +17,7 @@ function LoginScene() {
     };
 
     this.createUI = function () {
+        $me = $("<div id='_login'></div>");
 
         $me.append($('\
             <div id="_login_center">\
@@ -28,6 +29,7 @@ function LoginScene() {
             <img src="app/static/img/register_button.png">\
             <form id="loginForm">\
             <input type="text" name="username" placeholder=" 请输入账号">\
+            <label id="username-error" class="error" for="username" ></label>\
             <input type="password" name="password" placeholder=" 请输入密码">\
             </form>\
             </div>\
@@ -49,12 +51,25 @@ function LoginScene() {
         $me.children().hide();
         $me.children().slideDown();
 
+        //$form.validate.addMethod("Repeat", function(value, element, param){
+        //s
+        //},"用户名不存在");
+
         $form.validate({
             rules: {
                 username: {
                     required: true,
                     minlength: 6,
-                    maxlength: 12
+                    maxlength: 12,
+                    remote:{
+                        // todo validate + ajax 验证
+                        url: "username_check.php?action=check&username="+$("[name=username]").val(),
+                        type:"get",
+                        dataType:"text",
+                        dataFilter: function(data){
+                            return data=="OK";
+                        }
+                    }
                 },
                 password: {
                     required: true,
@@ -63,24 +78,39 @@ function LoginScene() {
                 }
             },
             // todo 无效
-            message: {
+            messages: {
+                username:{
+                    remote:"用户名不存在"
+                },
                 password: {
-                    required: "adsfdasfd"
+                    required: "这是必填字段"
                 }
             }
         });
 
+        //$("input[name=username]").blur(function(){
+        //    var xmlhttp = new XMLHttpRequest();
+        //    xmlhttp.open("get", "username_check.php?action=check&username="+$("[name=username]").val(), true);
+        //
+        //    if($("#username-error").length == 0 || $("#username-error").html() == ""){
+        //        //alert(123);
+        //        xmlhttp.send();
+        //        xmlhttp.onreadystatechange = function(){
+        //            //alert(this.responseText);
+        //            $("#username-error").html(this.responseText).show();
+        //        }
+        //    }
+        //});
+
         // 注册
         $(_login_center_box).children("img:eq(3)").click(function () {
             $(document.body).trigger("clickSignButton");
-            $me = $("<div id='_login'></div>");
         });
 
         // 登陆
         $(_login_center_box).children("img:eq(2)").click(function () {
             if ($form.valid()) {
                 $(document.body).trigger("loginCorrect", $form);
-                $me = $("<div id='_login'></div>");
             }
         });
     }
@@ -135,13 +165,38 @@ function SignScene() {
             $me = $("<div id='_sign'></div>");
         });
 
+
+        //// AJAX 验证查重
+        //$("input[name=username]").blur(function(){
+        //    var xmlhttp = new XMLHttpRequest();
+        //    xmlhttp.open("get", "username_check.php?action=sign&username="+$("[name=username]").val(), true);
+        //
+        //    if($("#username-error").length == 0 || $("#username-error").html() == ""){
+        //        //alert(123);
+        //        xmlhttp.send();
+        //        xmlhttp.onreadystatechange = function(){
+        //            //alert(this.responseText);
+        //            $("#username-error").html(this.responseText).show();
+        //        }
+        //    }
+        //});
+
         // 验证 注册信息
         $("#signForm").validate({
             rules: {
                 username: {
                     required: true,
                     minlength: 6,
-                    maxlength: 12
+                    maxlength: 12,
+                    remote:{
+                        // todo validate + ajax 验证
+                        url: "username_check.php?action=sign&username="+$("[name=username]").val(),
+                        type:"get",
+                        dataType:"text",
+                        dataFilter: function(data){
+                            return data=="";
+                        }
+                    }
                 },
                 password1: {
                     required: true,
@@ -154,7 +209,10 @@ function SignScene() {
                 }
             },
             // todo 无效
-            message: {
+            messages: {
+                username:{
+                    remote:"用户名已被使用"
+                },
                 password2: {
                     required: "两次输入不相同"
                 }
@@ -768,6 +826,7 @@ function ResultScene() {
 
     }
 }
+
 // 仓库
 function RepertoryScene() {
     var self = this;
@@ -877,7 +936,7 @@ function RepertoryScene() {
     }
 }
 
-// todo 游戏界面
+// 游戏界面
 function GameScene() {
     var self = this;
     var $me = $("<div id='_game'></div>");
@@ -1241,7 +1300,7 @@ function GameScene() {
     }
 }
 
-
+// 时间补零 | int(8) -> str('08')
 function num_str(num) {
     if (num < 10) {
         num = "0" + num
@@ -1249,6 +1308,7 @@ function num_str(num) {
     return num
 }
 
+// 定时器累加数转时间时间 | int(50) -> str('00:01')
 function num_time(time) {
     time = time / 50;
     var min = num_str(parseInt(time / 60));

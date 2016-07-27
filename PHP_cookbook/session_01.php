@@ -37,8 +37,96 @@ function extract_string(){
 
 // ----------------------------------------------------------------------------
 // 3.替换字符串
+function replace_string(){
+	$str = 'hello word';
+	echo substr_replace($str, 'PHP', 6, 4),'<br>';
+
+	$str_too_long = "Today, I have a dream.But, balabalabalabalabalabalabalabalabalabalabalabala";
+	echo substr_replace($str_too_long, '...', 25);
+}
+// replace_string();
+
+// 方法参数设置与 substr() 类似
+// 可以实现删除($str, '', 6, 4)、替换($str, 'PHP', 6, 4)、插入($str, 'PHP', 0, 0)
+// 可用于省略显示长文本
 
 
+// ----------------------------------------------------------------------------
+// 4.逐字节处理字符
+function for_string(){
 
+	// 计算元音字母数量
+	$str = 'Today, I have a dream.';
+	for ($i = 0; $i < strlen($str); $i++) {
+		if (strstr('AEIOUaeiou', $str[$i])) {
+			$vowels++;
+		}
+	}
+	echo $vowels;
+}
+// for_string();
+
+// 就是 for 循环没什么可说的
+
+
+// ----------------------------------------------------------------------------
+// 5.按字或按字节反转字符串
+function reverse_string(){
+	$str = 'Today, I have a dream.';
+
+	// 按字符
+	echo strrev($str),'<br>';
+	// 按字
+	$words = explode(' ', $str);
+	$words = array_reverse($words);
+	$str_r = implode(' ', $words);
+	echo $str_r, '<br>';
+ 		// or
+ 	echo implode(' ', array_reverse(explode(' ', $str)));
+}
+// reverse_string();
+
+
+// ----------------------------------------------------------------------------
+// 6.扩展和压缩制表符
+// 略
+
+
+// ----------------------------------------------------------------------------
+// 7.控制大小写
+function b_s_control(){
+	$str = 'Today, I have a dream.';
+
+	// 将字符串中的第一个字母转成大写
+	echo ucfirst($str), '<br>';
+	// 将字符串中每个单词的首字母转成大写
+	echo ucwords($str), '<br>';
+	// 全转大写
+	echo strtoupper($str), '<br>';
+	// 全转小写
+	echo strtolower($str), '<br>';
+}
+// b_s_control();
+
+
+// ----------------------------------------------------------------------------
+// 8.在字符串中插入函数和表达式
+// 略
+
+
+// ----------------------------------------------------------------------------
+// 9.删除字符串两端的空白符
+function delete_empty(){
+	$str = "<h1>\n + balabala + \n</h1>";
+
+	// 删除开始和结束处
+	echo trim($str), '<br>';
+	// 删除开始处
+	echo ltrim($str), '<br>';
+	// 删除结尾处
+	echo rtrim($str), '<br>';
+}
+// delete_empty();
+// 空白符包括：换行符、回车符、空格符、制表符、以及 Null
 
 ?>

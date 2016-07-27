@@ -94,7 +94,7 @@
                 [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
             ];
 
-            user.insert(['sdfsdf', 'sdfsdf', 'sdfsdf', 9999, 99, '[[2,3,4],[102,103],[202,203],[302,303]]', '[2,102,202,302]', JSON.stringify(save_list)]);
+            user.insert(['asdasd', 'asdasd', 'asdasd', 9999, 99, '[[2,3,4],[102,103],[202,203],[302,303]]', '[2,102,202,302]', JSON.stringify(save_list)]);
 
 //            console.log(JSON.parse(JSON.stringify(save_list)));
 
@@ -109,15 +109,14 @@
                 director.runScene(signScene);
             });
 
+            // 登陆验证 JS
             loginScene.bind("loginCorrect", function (e, form) {
 
                 var username = $(form).children("input[name=username]").val();
                 var password = $(form).children("input[name=password]").val();
 
-//                console.log(form)
                 user.select(['*', "username='" + username + "'"], function (result) {
 
-//                    console.log(result.rows);
                     if (result.rows.length == 0) {
 
                         alert("账号名不存在");
@@ -142,7 +141,24 @@
                         }
                     }
                 });
+            });
 
+
+            // 登陆验证 PHP
+            loginScene.bind("loginCorrect1", function (e, form){
+
+                // todo AJAX 密码验证
+                var username = $(form).children("input[name=username]").val();
+                var password = $(form).children("input[name=password]").val();
+                $.ajax({
+                    url: "username_check.php?action=password&username="+$("[name=username]").val()+"&password="+$("[name=password]").val(),
+                    type:"get",
+                    dataType:"text",
+                    dataFilter: function(data){
+                        return data=="OK";
+                    }
+                });
+                director.runScene(mainScene);
             });
 
 
