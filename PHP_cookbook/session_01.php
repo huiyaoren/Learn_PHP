@@ -1,8 +1,9 @@
 <?php 
 
 // 第一章 字符串
-
-
+if($_GET['a']){
+	$_GET['a']();
+}
 // ----------------------------------------------------------------------------
 // 1.访问子字符串
 function access_string(){
@@ -133,6 +134,7 @@ function delete_empty(){
 // ----------------------------------------------------------------------------
 // 10.生成逗号分隔的数据
 function create_csv(){
+
 	$sales = [
 		['NE', '2005-01-01', '2005-01-01', 12.54],
 		['NW', '2005-01-01', '2005-01-01', 546.33],
@@ -140,7 +142,52 @@ function create_csv(){
 		['SW', '2005-01-01', '2005-01-01', 945.21],
 		['All Regious', '--', '--', 1597.34]
 	];
+
+	// 写入数据到 csv 文件中
+	function create_csv_in_file($sales){
+		$fh = fopen('sales.csv', 'w') or die("Can't open sales.csv");
+		foreach ($sales as $sales_line){
+			if(fputcsv($fh, $sales_line) === false){
+				die("Can't write CSV line");
+			}
+		}
+		fclose($fh) or die("Can't close sale.csv");
+	}
+
+	// 写入特殊的输出流 php://output 中
+	function create_csv_in_data($sales){
+		$fh = fopen('php://output', 'w');
+		foreach ($sales as $sales_line){
+			if(fputcsv($fh, $sales_line) === false){
+				die("Can't write CSV line");
+			}
+		}
+		fclose($fh);
+	} 
+
+	// 写到字符串中
+	function create_csv_in_str($sales){
+		ob_start();
+		$fh = fopen('php://output', 'w') or die("Can't open php://output");
+		foreach($sales as $sales_line){
+			if(fputcsv($fh, $sales_line) === 1){
+				die("Can't write CSV line");
+			}
+		}
+		fclose($fh) or die("Can't close php://output");
+		$output = ob_get_contents();
+		ob_end_clean();
+	}
+
+
+	// create_csv_in_file($sales);
+	// create_csv_in_data($sales);
+	// create_csv_in_str($sales);
 }
+
+
+
+
 
 
 
