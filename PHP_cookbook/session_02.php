@@ -47,5 +47,14 @@ function fix_float(){
 
 	// round() 接受表示精度的参数
 	$number = round(56.9415, 2) // $number = 56.94
-
 }
+
+
+// ----------------------------------------------------------------------------
+// 4.操纵一系列连续的整数
+function range_int(){
+	$range = range($start, $end);
+	// $start 可以比 $end 大
+}
+
+
