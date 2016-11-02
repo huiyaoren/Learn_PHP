@@ -188,7 +188,7 @@ function create_csv(){
 
 // ----------------------------------------------------------------------------
 // 11.解析逗号分隔的数据
-function encode_csv_in_html_table(){
+function decode_csv_in_html_table(){
 	create_csv();
 
 	$fp = fopen('sales.csv', 'r') or die("can't open file");
@@ -241,6 +241,75 @@ function create_pack(){
 	create_pack_without_pack($books);
 }
 
+
+// ----------------------------------------------------------------------------
+// 13.解析字段宽度固定的数据记录
+function decode_pack(){
+	// 1-34 用 substr() 函数解析固定宽度的记录
+	function decode_pack_with_substr(){
+		$fp = fopen('fixed-with-records.txt'. 'r') or die("can't open file");
+		while($s = $fgets($fp, 1024)){
+			$fields[0] = substr($s, 0, 10);
+			$fields[1] = substr($s, 10, 5);
+			$fields[2] = substr($s, 15, 12);
+			// 调用对这个数组进行处理的函数
+			process_fields($fields);
+		}
+		fclose($fp) or die("cna't close file");
+	}
+
+	// 1-35 用 unpack() 函数解析固定宽度的记录
+	function decode_pack_with_unpack(){
+		$fp = fopen('fixed-with-records.txt'. 'r') or die("can't open file");
+		while($s = $fgets($fp, 1024)){
+			$fields = unpack('A25title/A15author/A4publication_year', $s);
+			// 调用对这个数组进行处理的函数
+			process_fields($fields);
+		}
+		fclose($fp) or die("cna't close file");
+	}
+
+	// 如果把字段名和宽度分别以独立数组的形式传递给一个解析函数
+
+	// 1-36 pc_fixed_width_substr() 函数
+	function pc_fixed_width_substr($fields, $data){
+		$r = [];
+		for($i=0,$j=count($data);$i<$j;$i++){
+			$line_pos = 0;
+			foreach($fields as $field_name => $field_length){
+				$rs[$i][$field_name] = rtrim(subtr($data[$i], $line_pos, $field_length));
+				$line_pos += $fields_length;				
+			}
+		}
+		return $rs;
+	}
+
+	$book_fields = [
+		'title' => 25,
+		'author' => 14,
+		'publication_year' => 4
+	]
+	$book_array = pc_fixed_width_substr($book_fields, $books);
+
+	// 1-37 pc_fixed_width_unpack() 函数
+	function pc_fixed_width_unpack($format_string, $data){
+		$r = [];
+		for($i = 0 ,$j=count($data);$i<$j;$i++){
+			$r[$i] = unpack($format_string[$i])
+		}
+		return $r
+	}
+
+	$book_array = pc_fixed_width_unpack('A25title/A15author/A4publication_year', $books);
+
+	// 1-38 用 str_split() 分割字符串
+	function pack_split(){
+		$fields = str_split($line_of_data, 32);
+		// $fields[0] 保存 0-31 字节
+		// $fields[1] 保存 32-63 字节
+		// 以此类推
+	}
+}
 
 
 
