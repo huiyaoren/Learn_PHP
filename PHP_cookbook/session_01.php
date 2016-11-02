@@ -312,6 +312,20 @@ function decode_pack(){
 }
 
 
+// ----------------------------------------------------------------------------
+// 14.分离字符串
+function split_sting(){
+	// 用固定字符串作为分隔符 使用 explode() 函数
+	$words = explode(' ', 'My sentence is not very complicated');
+	// 用正则表达式描述分隔符 使用 split() 或 reg_split()
+	$words = split(' +', 'This  sentence  has  extra  whitespace  in it.');
+	$words = preg_split('/\d\. /', 'my day: 1. get up 2. get dressed 3. eat toast');
+	$lines = preg_split('/[\n\r]+/', $_REQUST['textarea']);
+	// /i 标志表示匹配的分隔符不区分大小写
+	$words = spliti(' x ', '31 inches x 22 inches X 9 inches');
+	$words = preg_split('/ x /i', '31 inches x 22 inches X 9 inches');
+
+}
 
 
 ?>
