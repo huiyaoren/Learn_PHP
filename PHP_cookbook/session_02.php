@@ -33,3 +33,19 @@ function compare_float(){
 
 // ----------------------------------------------------------------------------
 // 3.对浮点型数取整
+function fix_float(){
+	// 取整为最接近的整型数
+	$number = round(2.4); // $number = 2
+	// 向上取整
+	$number = ceil(2.4); // $number = 3
+	// 向下取整
+	$number = floor(2.4); // $number = 2
+
+	// 两整数中间数 向远离 0 的方向取整
+	$number = round(2.5); // $number = 3
+	$number = round(-2.5); // $number = -3
+
+	// round() 接受表示精度的参数
+	$number = round(56.9415, 2) // $number = 56.94
+
+}
