@@ -122,3 +122,19 @@ function compute_pow(){
 }
 // 常量 M_E 约等于 e
 // PHP 允许的最大数值大概是 1.8e308 超出范围会返回 INF 错误返回 NAN
+
+
+// ----------------------------------------------------------------------------
+// 9.格式化数字
+function format_number(){
+	$number = 1234.56;
+
+	// 插入小数点和千位分隔符
+	print number_format($number); // 1,234
+	print number_format($number, 2); // 1,234.56
+	// 可指定参数
+	print number_format($number, 2, '@', '#') // 1#234@56
+	// 在不知道小数位数时 保留格式化的数字
+	list($int, $dec) = explode('.', $number);
+	print number_format($number, strlen($dec));
+}
