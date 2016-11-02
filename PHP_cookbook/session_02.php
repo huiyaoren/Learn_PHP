@@ -58,3 +58,10 @@ function range_int(){
 }
 
 
+// ----------------------------------------------------------------------------
+// 5.在一个范围内生成随机数
+function range_random(){
+	// 生成大于等于 lower 小于等于 upper 的随机数
+	$random_number = mt_rand($lower, $upper);
+}
+
