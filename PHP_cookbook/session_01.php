@@ -180,12 +180,38 @@ function create_csv(){
 	}
 
 
-	// create_csv_in_file($sales);
+	create_csv_in_file($sales);
 	// create_csv_in_data($sales);
 	// create_csv_in_str($sales);
 }
 
 
+// ----------------------------------------------------------------------------
+// 11.解析逗号分隔的数据
+function encode_csv_in_html_table(){
+	create_csv();
+
+	$fp = fopen('sales.csv', 'r') or die("can't open file");
+	print "<table>\n";
+	while($csv_line = fgetcsv($fp)){
+		print '<tr>';
+		for($i = 0, $j = count($csv_line); $i<$j;$i++){
+			print '<td>'.htmlentities($csv_line[$i]).'</td>';
+		}
+		print "</tr>\n";
+	}
+	print "</table>\n";
+	fclose($fp) or die("can't close file");
+}
+
+// fgetcsv() 提供第二个参数 是一个大于 CSV 文件中最长一行的值 
+// 如果不指定 函数会读取一整行数据
+// 当平均长度超过 8192 字节时，指定明确的行长度会使运行速度加快
+// 避免用 explode() 按照逗号解析
+
+
+// ----------------------------------------------------------------------------
+// 12
 
 
 
