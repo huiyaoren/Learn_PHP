@@ -351,4 +351,36 @@ function save_data_in_str(){
 }
 
 
+// ----------------------------------------------------------------------------
+// 17.编程: 可下载的 CSV 文件
+function download_able_csv(){
+	require_once 'DB.php';
+	// 连接到数据库
+	$db = DB::connect('mysql://david:haoOr$localhost/phpcookbook');
+
+	// 从数据库中获取数据
+	$sales_data = $db->getAll('SELECT region, start, end, amount FROM sales');
+
+	// 为 fputcsv() 函数打开文件句柄
+	$output = fopen('php://output', 'w') or die("cna't open php://output");
+	$total = 0;
+
+	// 告诉浏览器发送的是一个 csv 文件 不直接显示并尝试载入一个外部程序来处理数据
+	header('Content-Type: applicatin/csv');
+	header('Content-Dispostion: attachment; filename="sales.csv"');
+
+	// 输出表头
+	fputcsv($output, ['Refion', 'Strat Date', 'End Date', 'Amount']);
+
+	// 输出每行数据 并递增 $total
+	foreach($sales_data as $sales_line){
+		fputcsv($output, $sales_line);
+		$total += $sales_line[3]
+	}
+
+	// 输出全部数据行，并关闭文件句柄
+	fputcsv($output, ['All Regions', '--', '--', $total]);
+	fclose($output) or die("can't close php://output");
+}
+
 ?>
