@@ -176,3 +176,26 @@ function radian_trigonometric(){
 	$cosine = cos(deg2rad($degree));
 }
 // 常量 M_PI 近视 π
+
+
+// ----------------------------------------------------------------------------
+// 14.处理极大数或极小数
+function deal_extrime_number(){
+	// BCMath
+	$sum = bcadd('11111111111111111111111111', '222222222222222222');
+	print $sum;
+
+	// GMP 
+	$sum = gmp_add('11111111111111111111111111', '222222222222222222');
+	print gmp_strval($sum);
+
+	// 升幂
+	print gmp_pow(2, 10);
+	// 阶乘
+	print gmp_fact(20);
+	// 找到 GCD
+	print gmp_gcd(123, 456);
+
+	// GMP 库基于 LGPL 许可
+	// big_int 基于 BSD 许可
+}
