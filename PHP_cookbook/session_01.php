@@ -324,8 +324,20 @@ function split_sting(){
 	// /i 标志表示匹配的分隔符不区分大小写
 	$words = spliti(' x ', '31 inches x 22 inches X 9 inches');
 	$words = preg_split('/ x /i', '31 inches x 22 inches X 9 inches');
-
 }
 
+
+// ----------------------------------------------------------------------------
+// 15.使文本在特定长度换行
+function text_wrap(){
+	$s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+	// 默认情况 wordwrap() 按照 75 字符自动换行
+	print "<pre>".wordwrap($s)."\n</pre>";
+	// 第二个参数指定不同行长度
+	print wordwrap($s, 50);
+	// 第三个参数可指定其他换行符
+	print wordwrap($s, 50, "\n\n");
+	// 第四个参数控制对比指定长度更长的单词的处理方式 值为 1 时超出长度的单词会换行 否则保留原来长度
+}
 
 ?>
