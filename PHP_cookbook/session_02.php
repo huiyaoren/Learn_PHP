@@ -199,3 +199,20 @@ function deal_extrime_number(){
 	// GMP 库基于 LGPL 许可
 	// big_int 基于 BSD 许可
 }
+
+
+// ----------------------------------------------------------------------------
+// 15.在不同进制间转换
+function convert_hex(){
+	$hex = 'a1'; // 十六进制
+	$decimal = base_convert($hex, 16, 10); // 转成十进制
+
+	// 十进制转二、四、八进制
+	//  bindec() octdec() hexdec()
+
+	// 二、四、八进制转十进制
+	//  decbin() decoct() dechex()
+
+	// 十 十六
+	printf('#%02X%02X%02X', 0, 102, 204); // #0066cc
+}
