@@ -157,3 +157,15 @@ function print_complex_number(){
 	$number = 4;
 	print "Your search return $number ".($number == 1 ? 'hit' : 'hits').'.';
 }
+
+
+// ----------------------------------------------------------------------------
+// 12.计算三角函数
+function compute_trigonometric(){
+	// cos() sin() tan()
+	$cos = cos(2.1232);
+
+	// asin() acos() atan()
+	$atan = atan(1.2);
+
+}
