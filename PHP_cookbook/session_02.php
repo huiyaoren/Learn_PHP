@@ -167,5 +167,12 @@ function compute_trigonometric(){
 
 	// asin() acos() atan()
 	$atan = atan(1.2);
-
 }
+
+
+// ----------------------------------------------------------------------------
+// 13.用度数而不是弧度来度量三角
+function radian_trigonometric(){
+	$cosine = cos(deg2rad($degree));
+}
+// 常量 M_PI 近视 π
