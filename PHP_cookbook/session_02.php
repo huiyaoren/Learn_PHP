@@ -141,11 +141,19 @@ function format_number(){
 
 
 // ----------------------------------------------------------------------------
-// 9.格式化货币值
+// 10.格式化货币值
 function format_currency(){
 	$number = 1234.56;
 	setlocale(LC_MONETARY, 'en_US');
 	print money_format('%n', $number); // $1,234.56
 	// 国际化货币格式
 	print money_format('%i', $number); // USD 1,234.56
+}
+
+
+// ----------------------------------------------------------------------------
+// 11.正确打印复数
+function print_complex_number(){
+	$number = 4;
+	print "Your search return $number ".($number == 1 ? 'hit' : 'hits').'.';
 }
