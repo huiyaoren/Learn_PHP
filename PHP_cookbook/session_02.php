@@ -46,7 +46,7 @@ function fix_float(){
 	$number = round(-2.5); // $number = -3
 
 	// round() 接受表示精度的参数
-	$number = round(56.9415, 2) // $number = 56.94
+	$number = round(56.9415, 2); // $number = 56.94
 }
 
 
@@ -64,4 +64,31 @@ function range_random(){
 	// 生成大于等于 lower 小于等于 upper 的随机数
 	$random_number = mt_rand($lower, $upper);
 }
+// mt_rand() 速度比 rand() 快
 
+
+// ----------------------------------------------------------------------------
+// 6.生成有偏随机数
+function weighted_random(){
+	$ads = [
+		'ford' => 12234,
+		'att' => 33412,
+		'ibm' => 15823
+	];
+
+	function pc_rand_weighted($numbers){
+		$total = 0;
+		foreach($numbers as $number => $weight){
+			$total += $weight;
+			$distribution[$number] = $total;
+		}
+		$rand = mt_rand(0, $total-1);
+		foreach($distribution as $number => $weight){
+			if($rand < $weight){
+				print $number;
+				break;
+			}
+		}
+	}
+	pc_rand_weighted($ads);
+}
