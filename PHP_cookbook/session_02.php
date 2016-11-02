@@ -138,3 +138,14 @@ function format_number(){
 	list($int, $dec) = explode('.', $number);
 	print number_format($number, strlen($dec));
 }
+
+
+// ----------------------------------------------------------------------------
+// 9.格式化货币值
+function format_currency(){
+	$number = 1234.56;
+	setlocale(LC_MONETARY, 'en_US');
+	print money_format('%n', $number); // $1,234.56
+	// 国际化货币格式
+	print money_format('%i', $number); // USD 1,234.56
+}
