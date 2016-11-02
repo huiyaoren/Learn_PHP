@@ -211,7 +211,35 @@ function encode_csv_in_html_table(){
 
 
 // ----------------------------------------------------------------------------
-// 12
+// 12.生成字段宽度固定的数据记录
+function create_pack(){
+	$books = [
+		['Elmer Gantry', 'Sinclar Lewis', 1927],
+		['The Scarlatte Inhertance', 'Robert Ludlum', 1972],
+		['The Parsifal Mosaic', 'William Styron', 1979]
+	];
+
+	// 1-32 生成固定宽度字段的数据记录
+	function create_pack_with_pack($books){
+		foreach ($books as $book){
+			// A25A15A4 告诉 pack() 把后面的参数分别转换成 25 14 4 个字符长以空格填充的字符串
+			print pack('A25A15A4', $book[0], $book[1], $book[2])."\n";
+		}	
+	}
+
+	// 1-33 不用 pack 函数生成固定宽度字段的数据记录
+	function create_pack_without_pack($books){
+		foreach($books as $book){
+			// 使用 substr() 来确保每个字段不会过长
+			// 使用 str_pad() 来保证每个字段不会过短
+			$title = str_pad(substr($book[0], 0, 25), 25, '.');
+			$author = str_pad(substr($book[1], 0, 15), 15, '.');
+			$year = str_pad(substr($book[2], 0, 4), 4, '.');
+			print "{$title}{$author}{$year}\n";
+		}
+	}
+	create_pack_without_pack($books);
+}
 
 
 
