@@ -52,3 +52,11 @@ function convert_time_part(){
 	$time_parts = getdate(163727110);
 }
 
+
+// ----------------------------------------------------------------------------
+// 4.以特定格式打印日期和时间
+function print_format_time(){
+	print strftime('%c');
+	print date('m/d/Y'); // 12/03/2007
+}
+// 适用于 date() strftime() 的格式化字符串：查表
