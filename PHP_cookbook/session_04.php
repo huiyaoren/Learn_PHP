@@ -174,3 +174,24 @@ function confirm_value_position(){
 	}
 }
 // 用 !== 来避免 0 == false 的情况
+
+
+// ----------------------------------------------------------------------------
+// 13.确定通过某种测试的元素
+function confirm_test_element(){
+	// 使用 foreach 循环
+	$movie = [];
+	foreach($movies as $movie){
+		if($movie['box_office_gross'] < 50000000){
+			$flops[] = $movie;
+		}
+	}
+
+	// 使用 array_filter()
+	$movie = [];
+	function flops($movie){
+		return ($movie['box_office_gross']) ? < 50000000 : 1 : 0;
+	}
+	$flops = array_filter($movies, 'flops');
+}
+// 用 array_filter 无法中途提前退出
