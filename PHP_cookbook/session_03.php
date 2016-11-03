@@ -76,3 +76,16 @@ function diff_between_dates(){
 	$diff_minutes = floor($diff_seconds/60);
 }
 // 由于月与年有可变的长度 所以无法准确表达对时差计算的结果
+
+
+// ----------------------------------------------------------------------------
+// 6.用儒略日计算两个日期时间的时间差
+// 略
+
+
+// ----------------------------------------------------------------------------
+// 7.找到周、月或者年中的某一天
+function find_someday(){
+	print strftime("Today is day %d of the mouth and $j of the year");
+	print "Today id day ".date('d').'of the mouth and '.date('z').' of the year.';
+}
