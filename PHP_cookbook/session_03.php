@@ -45,3 +45,10 @@ function convert_time_stamp(){
 	print strftime('%c', $then);
 }
 
+
+// ----------------------------------------------------------------------------
+// 3.将纪元时间戳转换为时间和日期部件
+function convert_time_part(){
+	$time_parts = getdate(163727110);
+}
+
