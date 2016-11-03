@@ -36,4 +36,12 @@ function get_current_time(){
 
 // ----------------------------------------------------------------------------
 // 2.将时间和日期部件转换为纪元时间戳
+function convert_time_stamp(){
+	// 获得特定纪元时间戳
+	$then = mktime(19, 45, 3, 3, 10, 1975);
+
+	// 使用纪元时间戳
+	print $then.'<br/>';
+	print strftime('%c', $then);
+}
 
