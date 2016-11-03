@@ -100,3 +100,18 @@ function change_array_size(){
 	// 减少数组大小 
 	array_splice($array, 2);
 }
+
+
+// ----------------------------------------------------------------------------
+// 7.将一个数组追加到另一个数组
+function array_add_array(){
+	$fruits=[1];
+	$vegetables=[2=>3];
+
+	$garden = array_merge($fruits, $vegetables); // 适合索引数组
+
+	$garden = $fruits + $vegetables; // 适合关联数组
+
+	var_dump($garden);
+}
+// 索引重名的情况下 一般右边数组的值会覆盖左边

@@ -146,7 +146,7 @@ function high_accuracy_time(){
 	print $elapsed = $end - $start;
 
 	// 用 microtime() 生成一个 ID
-	list($microseconds, $seconds) = explode(' ', miicrotime());
+	list($microseconds, $seconds) = explode(' ', microtime());
 	$id = $seconds.$microseconds.getmypid();
 	// 在多线程系统中不太可靠 存在小概率两线程同一秒调用 microtime()
 	// 使用 uniqid()
