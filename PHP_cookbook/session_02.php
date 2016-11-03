@@ -133,7 +133,7 @@ function format_number(){
 	print number_format($number); // 1,234
 	print number_format($number, 2); // 1,234.56
 	// 可指定参数
-	print number_format($number, 2, '@', '#') // 1#234@56
+	print number_format($number, 2, '@', '#'); // 1#234@56
 	// 在不知道小数位数时 保留格式化的数字
 	list($int, $dec) = explode('.', $number);
 	print number_format($number, strlen($dec));
@@ -222,12 +222,50 @@ function convert_hex(){
 // 16.非十进制数的计算
 function compute_hex(){
 	// 相应数字加上前导字符
-	$number = 0144 // 8 进制
-	$number = 100 // 10 进制
-	$number = 0x64 // 16 进制
+	$number = 0144; // 8 进制
+	$number = 100; // 10 进制
+	$number = 0x64; // 16 进制
 
 	// 用 16 进制计算十进制的 1~15
 	for($i = 0x1; $i < 0x10; $i++){
 		print dechex($i)."\n";
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 17.计算球面坐标系中两点间的距离
+function polar_distance(){
+	// 计算两点间的距离
+	function pc_sphere_distance($lat1, $lon1, $lat2, $lon2, $radius=6378.135){
+		$rad = doubleval(M_PI/180.0);
+
+		$lat1 = doubleval($lat1) * $rad;
+		$lon1 = doubleval($lon1) * $rad;
+		$lat2 = doubleval($lat2) * $rad;
+		$lon2 = doubleval($lon2) * $rad;
+
+		$theta = $lon2 - $lon1;
+		$dist = acos(sin($lat1) * sin($lat2) + cos($lat2) * cos($theta));
+		if($dist < 0){ $dist += M_PI; }
+
+		return $dist = $dist * $radius;
+	}
+
+	// NY 纽约
+	$lat1 = 40.858704;
+	$lon1 = -73.928632;
+
+	// SF 旧金山
+	$lat2 = 37.758434;
+	$lon2 = -122.435126;
+
+	$dist = pc_sphere_distance($lat1, $lon1, $lat2, $lon2);
+	print $dist;
+}
+// 地球上两位置的距离必须使用大圆算法 Great Circle
+// 由于地球不是严格意义上的球体 这样的计算结果误差上限为 0.5%
+
+
+// ----------------------------------------------------------------------------
+// 17.计算球面坐标系中两点间的距离
