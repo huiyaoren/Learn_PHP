@@ -60,3 +60,19 @@ function print_format_time(){
 	print date('m/d/Y'); // 12/03/2007
 }
 // 适用于 date() strftime() 的格式化字符串：查表
+
+
+// ----------------------------------------------------------------------------
+// 5.计算两个日期之间的时间差
+function diff_between_dates(){
+	$epoch_1 = mktime(19, 32, 56, 5, 10, 1965);
+	$epoch_2 = mktime(4, 29, 11, 11, 20, 1962);
+
+	$diff_seconds = $epoch_1 - $epoch_2;
+
+	$diff_weeks = floor($diff_seconds/604800);
+	$diff_days = floor($diff_seconds/86400);
+	$diff_hours = floor($diff_seconds/3600);
+	$diff_minutes = floor($diff_seconds/60);
+}
+// 由于月与年有可变的长度 所以无法准确表达对时差计算的结果
