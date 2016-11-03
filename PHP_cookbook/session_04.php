@@ -15,3 +15,17 @@ function not_zero_array(){
 	];
 }
 // 索引值从 1 开始常常会更有意义
+
+
+// ----------------------------------------------------------------------------
+// 2.用数组中的一个键保存多个元素
+function save_multiple_element(){
+	// 一个数组保存多个元素
+	$friut = [
+		'red' => ['strawberry', 'apple'],
+		'yellow' => ['banana']
+	];
+
+	// 使用一个对象
+	$friuts[] = $obj;
+}
