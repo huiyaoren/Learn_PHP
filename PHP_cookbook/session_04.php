@@ -29,3 +29,13 @@ function save_multiple_element(){
 	// 使用一个对象
 	$friuts[] = $obj;
 }
+
+
+// ----------------------------------------------------------------------------
+// 3.用一个整数范围来初始化数组
+function init_array_range(){
+	$cards = range(1, 52);
+
+	$odd = range(1, 52, 2);
+	$even = range(2, 52, 2);
+}
