@@ -128,7 +128,7 @@ function array_convert_str(){
 // ----------------------------------------------------------------------------
 // 9.使用逗号来打印数组
 function print_array_comma(){
-	
+
 	function pc_array_to_comma_string($array){
 
 		switch (count($array)){
@@ -142,5 +142,14 @@ function print_array_comma(){
 				$last = array_pop($array);
 				return join(', ', $array). ", and $last";
 		}
+	}
+}
+
+
+// ----------------------------------------------------------------------------
+// 10.检查数组中是否存在某个键
+function check_array_key(){
+	// 用 array_exists() 检查组元素的键
+	if(array_key_exists('key', $array)){
 	}
 }
