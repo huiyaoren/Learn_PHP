@@ -204,3 +204,11 @@ function max_min_array(){
 	$smallest = min($array);
 }
 // 要获取最大值或最小值的 key 时可以用 asort() 或 arsort() 排序 取第一个元素
+
+
+// ----------------------------------------------------------------------------
+// 15.反转数组
+function reverse_array(){
+	$array = ['zero', 'one', 'two'];
+	$reversed = array_reverse($array);
+}
