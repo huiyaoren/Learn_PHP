@@ -123,3 +123,24 @@ function array_convert_str(){
 	// 生成逗号分隔的列表
 	$string = join(',', $array);
 }
+
+
+// ----------------------------------------------------------------------------
+// 9.使用逗号来打印数组
+function print_array_comma(){
+	
+	function pc_array_to_comma_string($array){
+
+		switch (count($array)){
+			case 0:
+				return '';
+			case 1:
+				return reset($array);
+			case 2:
+				return join(' and', $array);
+			default:
+				$last = array_pop($array);
+				return join(', ', $array). ", and $last";
+		}
+	}
+}
