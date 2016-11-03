@@ -195,3 +195,12 @@ function confirm_test_element(){
 	$flops = array_filter($movies, 'flops');
 }
 // 用 array_filter 无法中途提前退出
+
+
+// ----------------------------------------------------------------------------
+// 14.确定数组中经计算后的最大或最小值
+function max_min_array(){
+	$largest = max($array;
+	$smallest = min($array);
+}
+// 要获取最大值或最小值的 key 时可以用 asort() 或 arsort() 排序 取第一个元素
