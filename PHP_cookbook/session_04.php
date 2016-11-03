@@ -65,3 +65,24 @@ function go_through_array(){
 // 如果在循环内部修改数组 不应该使用 foreach
 // each() 返回的变量不是数组中的原始值 而是一个副本
 // 使用 each() 时 指针越过数组末端将返回 false
+
+
+// ----------------------------------------------------------------------------
+// 5.从数组中删除元素
+function delete_array_element(){
+	// 删除一个元素
+	unset($array[3]);
+	unset($array['foo']);
+
+	// 删除多个不连续的元素
+	unset($array[3], $array[5]);
+	unset($array['foo'], $array['bar']);
+
+	// 删除多个连续的元素
+	array_splice($array, $offset, $length);
+
+	// 删除值 保留键
+	$array[3] = $array['foo'] = '';
+}
+// 即使在循环中 unset() PHP 会调整数组以便循环可以正常完成
+// 删除数组第一个或最后一个元素 array_shift() array_pop()
