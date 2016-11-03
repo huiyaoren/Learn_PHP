@@ -171,3 +171,8 @@ function outrange_date(){
 	$date = Date_calc::dateFormat(17, 4, 1790, '%A %B %e, %Y');
 	print "Benjamin Fraklin died on $date";
 }
+
+
+// ----------------------------------------------------------------------------
+// 17.编程：日历
+// 略
