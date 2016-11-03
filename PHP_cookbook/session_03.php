@@ -116,3 +116,13 @@ function compute_date(){
 	$birthday = 'March 10, 1975';
 	$whoopee_mode = strtotime("$birthday - 9 mouths ago");
 }
+
+
+// ----------------------------------------------------------------------------
+// 11.根据时区计算时间
+function compute_date_zone(){
+	// 用 date_default_timezone_set() 改变时区
+	$now = time();
+	date_default_timezone_set('America/New York');
+	print date('c', $now);
+}
