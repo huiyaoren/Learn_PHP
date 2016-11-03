@@ -126,3 +126,32 @@ function compute_date_zone(){
 	date_default_timezone_set('America/New York');
 	print date('c', $now);
 }
+
+
+// ----------------------------------------------------------------------------
+// 12.处理夏令时
+// 略
+
+
+// ----------------------------------------------------------------------------
+// 13.生成高精度的时间
+function high_accuracy_time(){
+	// 用 microtime() 来计时
+	$start = microtime(true);
+	for($i = 0;$i < 1000;$i++){
+		// do something
+		preg_match('/age=\d+/', $_SERVER['QUERY_STRING']);
+	}
+	$end = microtime(true);
+	print $elapsed = $end - $start;
+
+	// 用 microtime() 生成一个 ID
+	list($microseconds, $seconds) = explode(' ', miicrotime());
+	$id = $seconds.$microseconds.getmypid();
+	// 在多线程系统中不太可靠 存在小概率两线程同一秒调用 microtime()
+	// 使用 uniqid()
+}
+
+
+// ----------------------------------------------------------------------------
+// 13.生成高精度的时间
