@@ -153,3 +153,15 @@ function check_array_key(){
 	if(array_key_exists('key', $array)){
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 11.检查数组中是否包含某个元素
+function check_array_element(){
+	if(in_array($value, $array)){
+	}
+}
+// in_array() 函数在默认情况下使用 == 来比较
+// 如果需要用 === 要将 true 作为第三个参数 in_array(0, $array, true)
+// 用 in_array()查询项目时所用时间与数组项目数成正比 可以考虑用关联数组代替
+
