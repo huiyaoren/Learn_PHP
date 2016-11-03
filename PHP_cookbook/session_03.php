@@ -97,3 +97,22 @@ function validate_date(){
 	$valid = checkdate($month, $day, $year);
 }
 // checkdate() 能够正确处理闰年
+
+
+// ----------------------------------------------------------------------------
+// 9.从字符串中解析日期和时间
+function resolve_date(){
+	$a = strtotime('march 10');
+	$a = strtotime('last thursday');
+	$a = strtotime('now + 3 mouths');
+	$a = strtotime('today');
+}
+
+
+// ----------------------------------------------------------------------------
+// 10.对日期进行加减运算
+function compute_date(){
+	// 用 strtotime() 计算时间间隔
+	$birthday = 'March 10, 1975';
+	$whoopee_mode = strtotime("$birthday - 9 mouths ago");
+}
