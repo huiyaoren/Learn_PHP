@@ -89,3 +89,11 @@ function find_someday(){
 	print strftime("Today is day %d of the mouth and $j of the year");
 	print "Today id day ".date('d').'of the mouth and '.date('z').' of the year.';
 }
+
+
+// ----------------------------------------------------------------------------
+// 8.验证日期
+function validate_date(){
+	$valid = checkdate($month, $day, $year);
+}
+// checkdate() 能够正确处理闰年
