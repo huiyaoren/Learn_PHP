@@ -86,3 +86,17 @@ function delete_array_element(){
 }
 // 即使在循环中 unset() PHP 会调整数组以便循环可以正常完成
 // 删除数组第一个或最后一个元素 array_shift() array_pop()
+
+
+// ----------------------------------------------------------------------------
+// 6.改变数组大小
+function change_array_size(){
+	// 最初大小 3
+	$array = ['apple', 'banana', 'coconut'];
+
+	// 增大到 5
+	$array = $array_pad($array, 5, ''); // 第二个参数可以是负数
+
+	// 减少数组大小 
+	array_splice($array, 2);
+}
