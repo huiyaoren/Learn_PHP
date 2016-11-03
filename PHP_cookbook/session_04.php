@@ -212,3 +212,19 @@ function reverse_array(){
 	$array = ['zero', 'one', 'two'];
 	$reversed = array_reverse($array);
 }
+
+
+// ----------------------------------------------------------------------------
+// 16.数组排序
+function array_sort(){
+	// 按惯例对数组排序
+	$states = ['Delaware', 'Pennsylvania', 'New Jersey'];
+	sort($states);
+
+	// 以数字为标准排序
+	$scores = [1, 10, 2, 20];
+	sort($scores, SORT_NUMERIC);
+}
+// sort() 不会保留元素间的键值关联 
+// asort() 可以保留关联
+// natsort() 可以对数组按自然的排序算法排序 即使元素混合了字符串和数字
