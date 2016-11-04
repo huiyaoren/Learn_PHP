@@ -228,3 +228,18 @@ function array_sort(){
 // sort() 不会保留元素间的键值关联 
 // asort() 可以保留关联
 // natsort() 可以对数组按自然的排序算法排序 即使元素混合了字符串和数字
+
+
+// ----------------------------------------------------------------------------
+// 17.根据可计算字段对数组进行排序
+function sort_array_field(){
+	function natrsort($a, $b){
+		return strnatcmp($b, $a);
+	}
+	$test = array('test1.php', 'test10.php', 'test11.php', 'test2.php');
+	usort($tests, 'natrsort');
+	// strnatcmp() 在 $a>$b 时 返回大于 0 的值
+	// $b == $a 时 返回 0
+	// $a<$b 时返回小于 0 的值
+	// 用 usort 对大数组排序较慢
+}
