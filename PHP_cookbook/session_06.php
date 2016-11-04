@@ -100,3 +100,13 @@ function jump_chose_para(){
 	}
 }
 // 不要写错逗号个数
+
+
+// ----------------------------------------------------------------------------
+// 9.返回失败信息
+function return_false(){
+	function lookup($name){
+		if(empty($name)) {return false;}
+	}
+}
+// 尽量避免用 0 '' 来代替 false
