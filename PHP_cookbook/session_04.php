@@ -395,3 +395,55 @@ if(!isset($array['animal'])){
 // isset($array['animal']) 会触发 offsetExists()
 // $array['animal'] == 'wabbit' 会触发 offsetGet()
 // unset($array['animal']) 会触发 offsetUnset()
+
+
+// ----------------------------------------------------------------------------
+// 25.编程：输出水平居中的 HTML 表格
+function print_html_table(){
+	function pc_grid_horizontal($array, $size){
+
+		// 计算 td 的宽度
+		$table_width = 100;
+		$width = intval($table_width / $size);
+
+		// 定义输出的 tr 和 td 标签
+		$tr = '<tr align="center">';
+		$td = "<td width=\"$stable_width%%\">%s</td>";
+
+		// 表格开始标签
+		$grid = "<table width=\"$table_width%%\">{$tr}";
+
+		// 循环遍历数组中的元素 并将元素加入到 $size 列中
+		// $i 用于跟踪是否要开始新行
+		$i = 0;
+		foreach($array as $e){
+			$grid .= sprintf($td, $e);
+			$i++;
+
+			// 一行结束
+			// 输出闭标签 并开始新行
+			if(!($i % $size)){
+				$grid .= "</tr>$tr";
+			}
+		}
+
+		// 用空白符填充剩余表元
+		while ($i % $size){
+			$grid .= sprintf($td, '&nbsp;');
+			$i++;
+		}
+
+		// 如果需要 加上</tr>
+		$end_tr_len = strlen($tr) * -1;
+		if(substr($grid, $end_tr_len) != $tr){
+			$grid .= '</tr>';
+		} else {
+			$grid = substr($grid, 0, $end_tr_len);
+		}
+
+		// 输出表格闭标签
+		$grid .= '</table>';
+
+		return $grid;
+	}
+}
