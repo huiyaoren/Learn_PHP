@@ -42,3 +42,20 @@ function name_para(){
 // 会使函数中代码变得复杂
 // 但能够使调用代码更简单
 // 拼错参数名称时 PHP 不会报错 可以对参数设置默认值
+
+
+// ----------------------------------------------------------------------------
+// 5.创建可以接受个数可变参数的函数
+function changable_para_function(){
+	function mean($number){
+		$sum = 0;
+		$size = count($numbers);
+		for($i=0; $i<$size; $i++){
+			$sum += $numbers[$i];
+		}
+		$average = $sum/$size;
+		return $average;
+	}
+	$mean = mean([96, 93, 97]);
+}
+// 利用数组实现 或者使用 func_get_arg()
