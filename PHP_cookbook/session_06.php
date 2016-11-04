@@ -73,3 +73,14 @@ function return_para(){
 		}
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 7.返回多个值
+function return_many_parament(){
+	// 返回一个数组 再用 list() 分离
+	function averages($state){
+		return [$median, $mean, $mode];
+	}
+	list($median, $mean, $mode) = averages($states);
+}
