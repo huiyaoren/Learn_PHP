@@ -270,3 +270,19 @@ function sort_many_array(){
 // SORT_STRING 字符排序
 // SORT_ASC 倒序
 // SORT_DESC 倒序
+
+
+// ----------------------------------------------------------------------------
+// 19.使用方法而不是函数来对数组进行排序
+function sort_by_function(){
+	// 传递一个包含类名和方法名来代替函数名
+	usort($access_time, ['dates', 'compare']);
+
+	class pc_sort(){
+		// 反序字符串比较
+		function strrcmp($a, $b){
+			return strcmp($b, $a);
+		}
+	}
+	usort($words, ['pc_sort', 'strrcmp']);
+}
