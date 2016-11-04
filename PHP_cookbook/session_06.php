@@ -24,3 +24,21 @@ function wrap_html_tag(&$string, $tag='b'){
 	// 把变量传递给函数 并保留对变量的修改
 	$string = "<$tag>$string</$tag>";
 }
+
+
+// ----------------------------------------------------------------------------
+// 4.使用命名的参数
+function name_para(){
+	// 让函数接受一个关联数组的参数
+	function image($img){
+		$tag = '<img src="'.$img['src'].'">';
+		return $tag;
+	}
+	$img = image([
+		'src' => 'cow.png', 
+		'alt' => 'cows say moo'
+	]);
+}
+// 会使函数中代码变得复杂
+// 但能够使调用代码更简单
+// 拼错参数名称时 PHP 不会报错 可以对参数设置默认值
