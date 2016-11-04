@@ -138,3 +138,23 @@ function share_var(){
 // windows 平台上不能使用 System V共享内存
 // 还有一种方式 APC
 
+
+// ----------------------------------------------------------------------------
+// 7.把复杂的数据类型压缩到一个字符串中
+function compress_data_in_str(){
+	// 把变量编码成文本
+	$pantry = [
+		'suger' => '2 lbs.',
+		'butter' => '3 sticks'
+	];
+	$fp = fopen('/tmp/pantry', 'w') or die("Can't open pantry");
+	fputs($fp, serialize($pantry));
+	fclose($fp);
+
+	// 恢复变量
+	$new_pantry = unserialize(file_get_content('/tmp/pantry'));
+}
+// 用作 URL 时需要对数据调用 urlencode()
+// magic_quote_gpc 启用时 get post cookie 中传递的数据反序列化之前必须用 stripslashes() 处理
+// magic_quote_runtime 启用时 向文件中写入序列化的数据之前必须用 addslash() 处理 读取时stripslash() 处理
+
