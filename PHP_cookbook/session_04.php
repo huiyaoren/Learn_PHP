@@ -190,7 +190,7 @@ function confirm_test_element(){
 	// 使用 array_filter()
 	$movie = [];
 	function flops($movie){
-		return ($movie['box_office_gross']) ? < 50000000 : 1 : 0;
+		return ($movie['box_office_gross'])  < 50000000 ? 1 : 0;
 	}
 	$flops = array_filter($movies, 'flops');
 }
@@ -200,7 +200,7 @@ function confirm_test_element(){
 // ----------------------------------------------------------------------------
 // 14.确定数组中经计算后的最大或最小值
 function max_min_array(){
-	$largest = max($array;
+	$largest = max($array);
 	$smallest = min($array);
 }
 // 要获取最大值或最小值的 key 时可以用 asort() 或 arsort() 排序 取第一个元素
@@ -243,3 +243,30 @@ function sort_array_field(){
 	// $a<$b 时返回小于 0 的值
 	// 用 usort 对大数组排序较慢
 }
+
+
+// ----------------------------------------------------------------------------
+// 18.对多个数组进行排序
+function sort_many_array(){
+	// 对多个数组排序
+	$colors = ['Red', 'White', 'Blue'];
+	$cites = ['Boston', 'New York', 'Chicago'];
+
+	array_multisort($colors, $cites);
+	print_r($colors);
+	print_r($cites);
+
+	// 对一个多维数组进行排序 需要传递相关的数组元素
+	$stuff = [
+		'color' => ['Red', 'White', 'Blue'],
+		'cites' => ['Boston', 'New York', 'Chicago']
+	];
+	array_multisort($stuff['colors'], $stuff['cites']);
+	print_r($stuff);
+}
+// array_multisort() 可以在数组后传递常量
+// SORT_REGULAR 自然排序
+// SORT_NUMERIC 数字排序
+// SORT_STRING 字符排序
+// SORT_ASC 倒序
+// SORT_DESC 倒序
