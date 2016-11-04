@@ -110,3 +110,30 @@ function return_false(){
 	}
 }
 // 尽量避免用 0 '' 来代替 false
+
+
+// ----------------------------------------------------------------------------
+// 10.调用可变函数
+function invoke_changable_function(){
+	// 使用 call_user_func()
+	function get_file($filename) { return file_get_contents($filename); }
+
+	$function = 'get_file';
+	$filename = 'graphic.png';
+
+	call_user_func($function, $filename);
+
+	// 如果函数接受不同个数参数 可以使用 call_user_func_array()
+	function get_file($filename){ return file_get_contents($filename); }
+	function put_file($filename, $data){ return file_put_contents($filename, $data); }
+
+	if($action == 'get_file'){
+		$function = 'get_file';
+		$args = ['graphic.png'];
+	} elseif($action == 'put') {
+		$function = 'put_file';
+		$args = ['graphic.png', $graphic];
+	}
+	
+	call_user_func_array($function, $args);
+}
