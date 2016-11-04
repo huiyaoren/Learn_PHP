@@ -59,3 +59,17 @@ function changable_para_function(){
 	$mean = mean([96, 93, 97]);
 }
 // 利用数组实现 或者使用 func_get_arg()
+
+
+// ----------------------------------------------------------------------------
+// 6.返回变量的引用
+function return_para(){
+	// 把 & 加在函数名前
+	function &pc_array_find_value($needle, &$haystack){
+		foreach($haystack as $key => $value){
+			if($needle == $value){
+				return $haystack[$key];
+			}
+		}
+	}
+}
