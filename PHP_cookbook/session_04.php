@@ -293,3 +293,23 @@ function sort_by_function(){
 function radom_array(){
 	shuffle($array);
 }
+
+
+// ----------------------------------------------------------------------------
+// 21.删除数组中重复的元素
+function delete_repeat_element(){
+	$unique = array_unique($array);
+
+	// 在循环中创建
+	foreach($_REQUEST['friuts'] as $fruit) {
+		if(!in_array($array, $fruit)){
+			$array[] = $fruits;
+		}
+	}
+
+	// 关联数组
+	foreach($_REQUEST['fruits'] as $fruit){
+		$array[$fruit] = $fruit;
+	}
+}
+// array_unique() 会返回一个只包含唯一元素的新数组
