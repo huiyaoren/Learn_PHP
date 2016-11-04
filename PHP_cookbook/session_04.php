@@ -313,3 +313,27 @@ function delete_repeat_element(){
 	}
 }
 // array_unique() 会返回一个只包含唯一元素的新数组
+
+
+// ----------------------------------------------------------------------------
+// 22.对数组中的每一个元素都应用一个函数
+function map_array(){
+	function escape_data($value, $key){
+		$value = htmlentities($value, ENT_QUOTES);
+	}
+
+	$names = [
+		'firstname' => 'Babe',
+		'lastname' => "O'Riley"
+	];
+
+	array_walk($names, 'escape_data');
+
+	foreach ($names as $name) {
+		print '$name\n';
+	}
+
+	// 对于嵌套的数据使用 array_walk_recursive()
+	array_walk_recursive($names, 'escape_data');
+}
+// array_walk() 直接对数组内部操作 而不是返回数组副本
