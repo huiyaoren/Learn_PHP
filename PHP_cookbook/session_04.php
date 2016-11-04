@@ -278,7 +278,7 @@ function sort_by_function(){
 	// 传递一个包含类名和方法名来代替函数名
 	usort($access_time, ['dates', 'compare']);
 
-	class pc_sort(){
+	class pc_sort{
 		// 反序字符串比较
 		function strrcmp($a, $b){
 			return strcmp($b, $a);
@@ -354,3 +354,44 @@ function compute_array(){
 	// 计算对称差集
 	$difference = array_merge(array_diff($a, $b), array_diff($b, $a));
 }
+
+
+// ----------------------------------------------------------------------------
+// 24.创建一个类数组对象
+class FakeArray implements ArrayAccess {
+	private $elements;
+
+	public function _constrct(){
+		$this->elements = [];
+	}
+
+	public function offsetExists($offset){
+		return isset($this->elements[$offset]);
+	}
+
+	public function offsetGet($offset){
+		return $this->elements[$offset];
+	}
+
+	public function offsetSet($offset, $value){
+		return $this->elements[$offset] = $value;
+	}
+
+	public function offsetUnset($offset){
+		unset($this->elements[$offset]);
+	}
+}
+
+$array = new FakeArray;
+
+$array['animal'] = 'wabbit';
+if(isset($array['animal']) and $array['animal'] == 'wabbit'){
+	unset($array['animal']);
+}
+if(!isset($array['animal'])){
+	print "Well, kill you makes me tired";
+}
+// 对 $array['animal'] 赋值会触发 offsetSet()
+// isset($array['animal']) 会触发 offsetExists()
+// $array['animal'] == 'wabbit' 会触发 offsetGet()
+// unset($array['animal']) 会触发 offsetUnset()
