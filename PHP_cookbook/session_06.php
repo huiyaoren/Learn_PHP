@@ -17,3 +17,10 @@ function wrap_html_tag($string, $tag='b'){
 	return "<$tag>$string</$tag>";
 }
 
+
+// ----------------------------------------------------------------------------
+// 3.传递引用
+function wrap_html_tag(&$string, $tag='b'){
+	// 把变量传递给函数 并保留对变量的修改
+	$string = "<$tag>$string</$tag>";
+}
