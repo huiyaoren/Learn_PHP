@@ -84,3 +84,19 @@ function return_many_parament(){
 	}
 	list($median, $mean, $mode) = averages($states);
 }
+
+
+// ----------------------------------------------------------------------------
+// 8.跳跃选择返回的值
+function jump_chose_para(){
+	function time_parts($time){
+		return explode(':', $time);
+	}
+	list(, $minute,) = time_part('12:23:34');
+
+	// or
+	while(list(,,$rank,,) = fgetcsv($fh, 4096)){
+		print $rank;
+	}
+}
+// 不要写错逗号个数
