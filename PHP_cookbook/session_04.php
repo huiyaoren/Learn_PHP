@@ -286,3 +286,10 @@ function sort_by_function(){
 	}
 	usort($words, ['pc_sort', 'strrcmp']);
 }
+
+
+// ----------------------------------------------------------------------------
+// 20.对数组进行随机化处理
+function radom_array(){
+	shuffle($array);
+}
