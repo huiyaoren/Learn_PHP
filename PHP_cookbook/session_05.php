@@ -158,3 +158,10 @@ function compress_data_in_str(){
 // magic_quote_gpc 启用时 get post cookie 中传递的数据反序列化之前必须用 stripslashes() 处理
 // magic_quote_runtime 启用时 向文件中写入序列化的数据之前必须用 addslash() 处理 读取时stripslash() 处理
 
+
+// ----------------------------------------------------------------------------
+// 8.将变量内容转存为字符串
+function var_convert_str(){
+	print_r($array);
+	var_dump($array);
+}
