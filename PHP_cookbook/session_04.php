@@ -337,3 +337,20 @@ function map_array(){
 	array_walk_recursive($names, 'escape_data');
 }
 // array_walk() 直接对数组内部操作 而不是返回数组副本
+
+
+// ----------------------------------------------------------------------------
+// 23.计算两个数组的并集 交集 和差集
+function compute_array(){
+	// 计算并集
+	$union = array_unique(array_merge($a, $b));
+
+	// 计算交集
+	$intersection = array_intersect($a, $b);
+
+	// 计算简单的差集
+	$difference = array_diff($a, $b);
+
+	// 计算对称差集
+	$difference = array_merge(array_diff($a, $b), array_diff($b, $a));
+}
