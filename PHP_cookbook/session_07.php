@@ -108,7 +108,27 @@ abstract class Database{
 
 // ----------------------------------------------------------------------------
 // 9.传递对象引用
-$adam = new user;
-$dave = $adam;
+function turn_obj(){
+	$adam = new user;
+	$dave = $adam;	
+}
 // 使用 = 进行对象赋值时 只是传递了对对象的引用
 // 修改了一个 另一个也会被修改
+
+
+// ----------------------------------------------------------------------------
+// 10.克隆对象
+function clone_obj(){
+	// 引用
+	$rasmus = $zeev;
+
+	// 拷贝对象的值
+	$rasmus = clone $zeev;
+
+	// 深度拷贝
+	public function __clone(){
+		$this->address = clone $this->address;
+	}
+}
+// clone 默认为浅克隆 类中类不会被克隆 依旧是引用
+
