@@ -132,3 +132,22 @@ function clone_obj(){
 }
 // clone 默认为浅克隆 类中类不会被克隆 依旧是引用
 
+
+// ----------------------------------------------------------------------------
+// 11.重要的属性访问
+class Person {
+	private $__data = [];
+
+	public function __get($property){
+		if(isset($this->__data[$property])){
+			return $this->__data[$property];
+		} else {
+			return false;
+		}
+	}
+
+	public function __set($property, $value){
+		$this->__data[$property] = $value;
+	}
+}
+// 用 __get() __set() 拦截对属性的请求
