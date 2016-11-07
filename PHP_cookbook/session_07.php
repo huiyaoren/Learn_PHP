@@ -90,3 +90,17 @@ class Book implements Nameable {
 }
 // 接口定义一个对象必须实现的方法
 // 只定义方法 不实现
+
+
+// ----------------------------------------------------------------------------
+// 8.创建抽象的基类
+abstract class Database{
+	abstract public function connect(){};
+	abstract public function query();
+	abstract public function fetch();
+	abstract public function close();
+}
+// 一个包含抽象方法的类必须是抽象类
+// 抽象类可以包括非抽象方法
+// 如果子类没有实现父类的所有抽象方法 这个子类依然是抽象的
+// 抽象方法不能定义为 private 或 final
