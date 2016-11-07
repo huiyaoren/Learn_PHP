@@ -68,3 +68,25 @@ class Person{
 	}
 }
 // 可用 echo print 输出
+
+
+// ----------------------------------------------------------------------------
+// 7.定义接口
+interface Nameable{
+	public function getName();
+	public function setName($name);
+}
+
+class Book implements Nameable {
+	private $name;
+
+	public function getName(){
+		return $this->name;
+	}
+
+	public function setName($name){
+		return $this->name = $name;
+	}
+}
+// 接口定义一个对象必须实现的方法
+// 只定义方法 不实现
