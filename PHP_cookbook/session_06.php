@@ -154,3 +154,11 @@ function access_global_var(){
 		unset($GLOBALS['chew_out']); // 在全局作用域下删除
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 12.创建动态函数
+function create_dynamic_function(){
+	$add = create_function('$i,$j', 'return $i+$j');
+	$add(1, 1);
+}
