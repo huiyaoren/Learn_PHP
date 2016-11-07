@@ -47,3 +47,14 @@ class Person{
 	protected $age; // 在类和子类中可以访问
 	private $salary; // 只能在特定类中可以访问
 }
+
+
+// ----------------------------------------------------------------------------
+// 5.防止修改类和方法
+final class Mysql{
+	final public function connect($server, $username, $password){
+
+	}
+}
+// 最终类不能被子类化
+// 最终方法不能在子类中被重写
