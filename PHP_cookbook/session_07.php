@@ -158,3 +158,27 @@ class Person {
 function point_12(){
 	$orange = $fruit->get('citrus')->peel();
 }
+
+
+// ----------------------------------------------------------------------------
+// 13.聚合对象
+class Address{
+	protected $city;
+
+	public function setCity($city){
+		$this->city = $city;
+	}
+
+	public function getCity(){
+		return $this->city;
+	}
+}
+
+class Person {
+	protected $name;
+	protected $address;
+
+	public function __construct(){
+		$this->address = new Address;
+	}
+}
