@@ -137,3 +137,20 @@ function invoke_changable_function(){
 	
 	call_user_func_array($function, $args);
 }
+
+
+// ----------------------------------------------------------------------------
+// 11.在函数内部访问全局变量
+function access_global_var(){
+	function eat_fruit(){
+		global $chew_count;
+
+		for($i=$chew_count;$i>0;$i--){
+		}
+		for($i=$GLOBALS['chew_count'];$i>0;$i--){
+		}
+
+		unset($chew_count); // 只会在该函数中删除变量
+		unset($GLOBALS['chew_out']); // 在全局作用域下删除
+	}
+}
