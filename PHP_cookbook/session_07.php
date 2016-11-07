@@ -58,3 +58,13 @@ final class Mysql{
 }
 // 最终类不能被子类化
 // 最终方法不能在子类中被重写
+
+
+// ----------------------------------------------------------------------------
+// 6.定义字符串化的对象
+class Person{
+	public function __toString(){
+		return "$this->name <$this->email>";
+	}
+}
+// 可用 echo print 输出
