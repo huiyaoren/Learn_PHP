@@ -182,3 +182,24 @@ class Person {
 		$this->address = new Address;
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 14.访问被覆盖的方法
+class shape{
+	function draw(){}
+}
+
+class circle extends shape{
+	function draw($origin, $radius){
+		if ($radius > 0){
+			if($radius > 0){
+				parent::draw();
+				return true;
+			}
+			return false;
+		}
+	}
+}
+// 用 parent::function() 在子类中访问已被覆盖的父类中的方法
+// 对构造函数一样适用
