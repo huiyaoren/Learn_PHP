@@ -236,3 +236,13 @@ $area = math::pi * $radius * $radius;
 // 与访问静态属性类似 访问常量也不用先实例化类
 // 在同一个类中访问需要 加上 self::var
 // 不能把一个表达式的值赋给常量
+
+
+// ----------------------------------------------------------------------------
+// 17.定义静态属性和方法
+class Format{
+	public static function number($number, $decimals=2, $decimal=',', $thousands='.'){
+		return number_format($number, $decimals, $decimal, $thousands);
+	}
+}
+print Format::number(123.567);
