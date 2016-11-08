@@ -203,3 +203,22 @@ class circle extends shape{
 }
 // 用 parent::function() 在子类中访问已被覆盖的父类中的方法
 // 对构造函数一样适用
+
+
+// ----------------------------------------------------------------------------
+// 15.使用方法的多态性
+function combine($a, $b){
+	// 根据传递给方法的参数数量和类型来决定执行不同的代码
+	if(is_int($a, $b)){
+		return $a + $b;
+	} 
+	if(is_float($a) and is_float($b)){
+		return $a + $b;
+	}
+	if(is_string($a) and is_string($b)){
+		return "$a$b";
+	}
+	if(is_array($a) and is_array($b)){
+		return array_merge($a, $b);
+	}
+}
