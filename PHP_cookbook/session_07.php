@@ -280,3 +280,14 @@ class LogFile{
 }
 // 包含句柄的属性在序列化后要重新建立
 // 不要再 __sleep() 方法中做妨碍序列化动作的事
+
+
+// ----------------------------------------------------------------------------
+// 19.分析对象
+Reflection::export(new ReflectionClass('Car')); // 了解汽车
+
+// or
+$car = new ReflectionClass('Car');
+if($car->hasMethod('retracTop')){
+	// 汽车可以伸缩
+}
