@@ -291,3 +291,12 @@ $car = new ReflectionClass('Car');
 if($car->hasMethod('retracTop')){
 	// 汽车可以伸缩
 }
+
+
+// ----------------------------------------------------------------------------
+// 20.检查某对象是不是一个特定类的技巧(实例)
+public function add(Person $person){
+	// 将特定类的实例作为参数传递给函数 并指定类名
+}
+
+// 可以使用 instanceof 操作符
