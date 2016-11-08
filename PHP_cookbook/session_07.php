@@ -246,3 +246,37 @@ class Format{
 	}
 }
 print Format::number(123.567);
+
+
+// ----------------------------------------------------------------------------
+// 18.控制对象的序列化
+class LogFile{
+	protected $filename;
+	protected $handle;
+
+	public function __construct($filename){
+		$this->filename = $filename;
+		$this->open();
+	}
+
+	private function open(){
+		$this->handle=fopen($this->filename, 'a');
+	}
+
+	public function __destruct(){
+		fclose($this->handle);
+	}
+
+	// 当对象序列化时调用
+	// 返回一个可序列化的对象属性的值
+	public function __sleep(){
+		return array('filename');
+	}
+
+	// 当对象反序列化时调用
+	public function __wakeUp(){
+		$this->open();
+	}
+}
+// 包含句柄的属性在序列化后要重新建立
+// 不要再 __sleep() 方法中做妨碍序列化动作的事
