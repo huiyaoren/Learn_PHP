@@ -300,3 +300,17 @@ public function add(Person $person){
 }
 
 // 可以使用 instanceof 操作符
+$media = get_something_from_catalog();
+if($media instanceof Book){
+	// 
+} else if($media instanceof DVD){
+	// 
+}
+
+
+// ----------------------------------------------------------------------------
+// 21.在对象实例化期间自动加载类文件
+function __autoload($class_name){
+	include "$class_name.php";
+	$person = new Person;
+}
