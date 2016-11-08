@@ -314,3 +314,15 @@ function __autoload($class_name){
 	include "$class_name.php";
 	$person = new Person;
 }
+
+
+// ----------------------------------------------------------------------------
+// 22.动态实例化一个对象
+$language = $_REQUEST['language'];
+$valid_langs = [
+	'en-US'=>'US English',
+	'en_UK'=>'British English'
+]
+if(isset($valid_langs[$language]) and class_exists($language)){
+	$lang = new $language;
+}
