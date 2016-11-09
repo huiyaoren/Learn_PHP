@@ -36,3 +36,10 @@ function point_2(){
 		print "$cookie_name = $cookie_value <br/>";
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 3.删除 Cookie
+function point_3(){
+	setcookie('flavor', '', 1);
+}
