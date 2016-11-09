@@ -326,3 +326,67 @@ $valid_langs = [
 if(isset($valid_langs[$language]) and class_exists($language)){
 	$lang = new $language;
 }
+
+
+// ----------------------------------------------------------------------------
+// 23.编程：whereis
+function whereis(){
+	if($arg < 2){
+		print "$argv[0]: classes1.php [,...]\n";
+		exit;
+	}
+
+	// 包含这些文件
+	foreach(array_slice($argv)){
+		include_once $filename;
+	}
+
+	// 从类开始收集方法和函数的信息
+	$methods = array();
+	foreach (get_declared_classes() as $class){
+		$r = new ReflectionClass($class);
+		// 排除内置类
+		if($r->isUserDefined()){
+			// 排除继承的方法
+			if($method->getDeclaringClass()->getName() == $class{
+				$signature = "$class::".$method->getName();
+				$method[$signature] = $method;
+			}
+		}
+	}
+
+	// 接下来添加函数
+	$functions  = [];
+	$defined_functions = get_defined_functions();
+	foreach($defined_functions['user'] as $function){
+		$functions[$function]  = new ReflectionFunction($function);
+	}
+
+	// 按类的字母顺序对方法进行排序
+	function sort_methods($a, $b){
+		list($a_class, $a_method) = explode('::', $a);
+		list($b_class, $b_method) = explode('::', $b);
+
+		if($cmp = strcasecmp($a_class, $b_class)){
+			return $cmp;
+		}
+
+		return strcasecmp($a_method, $b_method);
+	}
+	uksort($methods, 'sort_methods');
+
+	// 按字母顺序对函数进行排序
+	// 从列表中删除方法排序函数
+	unset($functions['sort_methods']);
+	// 排序
+	ksort($functions);
+
+	// 输出信息
+	foreach(array_merge($function, $methods) as $name => $reflect){
+		$file = $reflect->getfileName();
+		$line = $reflect->getStartLine();
+
+		printf("%-255 | %-405 | %6d\n", "$name()",  $file, $line);
+	}
+}
+
