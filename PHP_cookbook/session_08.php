@@ -52,3 +52,30 @@ function point_4(){
 	exit;
 }
 // 重定向 URL 应该包含协议和主机名 http://  www.example.com
+
+
+// ----------------------------------------------------------------------------
+// 5.检测不同的浏览器
+function point_5(){
+	$browser = get_browser();
+	if($browser->frames){
+
+	} elseif($browser->tables){
+
+	} else{
+
+	}
+}
+// 浏览器能力对象的属性
+// platform 浏览器运行的操作系统
+// version 浏览器版本号
+// majorver 浏览器主版本号
+// minorver 次版本号
+// frames 支持框架
+// tables 支持表格
+// cookies 支持 cookie
+// backgrounfsounds 支持 <embed> <bgsound> 添加的背景声音
+// vbscipt 支持 VBS
+// javascript 支持 js
+// javaapplets 支持 Java applets
+// activexcontrols 支持 ActiveX
