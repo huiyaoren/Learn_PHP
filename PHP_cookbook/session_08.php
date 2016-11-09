@@ -43,3 +43,12 @@ function point_2(){
 function point_3(){
 	setcookie('flavor', '', 1);
 }
+
+
+// ----------------------------------------------------------------------------
+// 4.重定向到一个不同位置
+function point_4(){
+	header('Location: http://www.example.com/catalog/index.php');
+	exit;
+}
+// 重定向 URL 应该包含协议和主机名 http://  www.example.com
