@@ -79,3 +79,19 @@ function point_5(){
 // javascript 支持 js
 // javaapplets 支持 Java applets
 // activexcontrols 支持 ActiveX
+
+
+// ----------------------------------------------------------------------------
+// 6.建立查询字符串
+function point_6(){
+	$vars = [
+		'name' => 'Oscar the Grouch',
+		'color' => 'green',
+		'favorite_punctuation' => '#'
+	];
+	$query_string = http_build_query($vars);
+	$url = '/muppet/select.php?'.$query_string;
+}
+// /muppet/selct.php?name=Oscar+the+Group&color=green&favorite_punctuation=%23
+// 特殊字符也按照十六进制编码
+// 为避免嵌入的参数被 HTML 错误解析:(&amp => &) 使用 htmlentities($query_string)
