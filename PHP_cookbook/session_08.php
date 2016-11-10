@@ -95,3 +95,11 @@ function point_6(){
 // /muppet/selct.php?name=Oscar+the+Group&color=green&favorite_punctuation=%23
 // 特殊字符也按照十六进制编码
 // 为避免嵌入的参数被 HTML 错误解析:(&amp => &) 使用 htmlentities($query_string)
+
+
+// ----------------------------------------------------------------------------
+// 7.读取 Post 请求的主体
+function point_7(){
+	$body = file_get_contents('php://input');
+}
+// 
