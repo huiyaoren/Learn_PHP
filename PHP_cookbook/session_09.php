@@ -99,3 +99,22 @@ function point_5(){
 	}
 }
 // 参数是 关联数组时将 in_array() 换成 array_key_exists()
+
+
+// ----------------------------------------------------------------------------
+// 6.验证表单输入：单选按钮
+function point_6(){
+	// 生成单选按钮
+	$choices = [
+		'eggs' => 'Eggs Bendict',
+		'toast' => 'Buttered Toast with Jam',
+		'coffee' => 'Piping Hot Coffee'
+	];
+	foreach ($choices as $key => $choice){
+		echo "<input type='radio' name='food' value='$key'/> $choice \n";
+	}
+	// 验证提交的单选按钮
+	if(! array_key_exists($_POST['food'], $choices)){
+		echo "You must select a valid choice.";
+	}
+}
