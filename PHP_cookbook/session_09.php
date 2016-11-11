@@ -75,3 +75,27 @@ function point_3(){
 // intval('30px') => 30
 // 不包含数字时 返回 0 可作为过滤器
 // 可用于获取 css 属性值 
+
+
+// ----------------------------------------------------------------------------
+// 4.验证码表单输入：电子邮件地址
+// 略
+
+
+// ----------------------------------------------------------------------------
+// 5.验证码表单输入：下拉菜单
+function point_5(){
+	// 生成下拉菜单
+	$choices = ['Eggs', 'Toast', 'Coffee'];
+	echo "<select name='food'>\n";
+	foreach ($choices as $choice) {
+		echo "<option>$choice</option>\n";		
+	}
+	echo "</select>";
+
+	// 验证菜单项目
+	if(! in_array($_POST['food'], $choices)){
+		echo "You must select a valid choice";
+	}
+}
+// 参数是 关联数组时将 in_array() 换成 array_key_exists()
