@@ -51,3 +51,27 @@ function point_2(){
 }
 // 避免把 0 误认为 false 应该用 strlen 验证而不是 empty
 
+
+// ----------------------------------------------------------------------------
+// 3.验证码表单输入：数字
+function point_3(){
+	// 大于等于 0 的整数
+	if(! ctype_digit($_POST['age'])){
+		print 'Your age must be a number bigger than or equal to zero.';
+	}
+
+	// 用类型转换法验证整数
+	if($_POST['rating'] != strval(intval($_POST['rating']))){
+		print 'Your rating must be an integer';
+	}
+
+	// 用类型转换法验证小数
+	if($_POST['temperature']!=strval(floatval($_POST['temperature']))){
+		print 'Your temperature must be a number'
+	}
+}
+// is_number 会将 0xCAFE 和 10e40 都识别为数字
+// intval('-6 week') => -6
+// intval('30px') => 30
+// 不包含数字时 返回 0 可作为过滤器
+// 可用于获取 css 属性值 
