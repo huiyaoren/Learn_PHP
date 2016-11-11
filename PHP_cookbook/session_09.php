@@ -118,3 +118,48 @@ function point_6(){
 		echo "You must select a valid choice.";
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 7.验证表单输入：复选框
+function point_7(){
+	// 生成一个复选框
+	$value = 'yes';
+	echo "<input type='checkbox' name='subscribe' value='yes' /> Subscribe?";
+
+	// 验证复选框
+	if(isset($_POST['subscribe'])){
+		// 所提供的值是正确的
+		if($_POST['subscribe'] == $value){
+			$subscribe = true;
+		} else {
+			// 所提供的值不正确
+			$subscribe = false;
+			print 'Invalid checkbox'
+		}
+	} else{
+		// 没有提供值
+		$subscribe =  false;
+	}
+
+	if($subscribe){
+		print 'You are subscribed';
+	}else{
+		print 'You are not subscribed';
+	}
+
+	// 生成复选框
+	$choices  = [
+		'eggs'=>'Eggs Benedict',
+		'toast' => 'Buttered Toast with Jim',
+		'coffee' => 'Piping Hot Coffee'
+	];
+	foreach ($choise as $key => $choice) {
+		echo "<input type='checkbox' name='food[]' value='$key' /> $choice \n";
+	}
+	// 验证复选框的值
+	if(array_intersect($_POST['food'], array_keys($choice)) != $_POST['food']){
+		echo "You must select only valid choice";
+	}
+}
+// array_intersect() 函数用于筛选出两个数组的共同元素
