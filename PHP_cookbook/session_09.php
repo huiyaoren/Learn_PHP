@@ -221,3 +221,66 @@ function point_11(){
 // 把多次提交的表单数据存入 session
 // 使上一页提交的数据在下一次请求时得到保存
 
+
+// ----------------------------------------------------------------------------
+// 12.重新显示带有内置错误提示的表单
+function point_12(){
+	$flavor = ['Vanilla', 'Chocolate', 'Rhinoceros'];
+
+	if($_SERVER['REQUEST_METHOD'] == 'GET'){
+		// 如果请求方法是 GET, 则只显示表单
+		display_form([]);
+	} else{
+		// 如果请求方法是 POST, 则验证表单
+		$errors = validate_form();
+		if(count($errors)){
+			// 如果有错误 重新显示带有错误提示的表单
+			display_form($errors);
+		} else {
+			// 如果表单数据全部有效 则向用户发送祝贺信息
+			print 'The form is submitted';
+		}
+	}
+
+	function display_form($errors){
+		global $flavors;
+
+		// 建立默认值
+		$defaults['name'] = isset($_POST['name']) ? htmlentities($_POST['name']) : '';
+		$defaults['age'] = isset($_POST['age']) ? "checked='checked'" : '';
+		foreach($flavors as $flavor){
+			if(isset($_POST['flavor']) and ($_POST['flavor'] == $flavor)){
+				$defaults['flavor'][$flavor] = "select='selected'";
+			} else {
+				$defaults['flavor'][$flavor] = '';
+			}
+		}
+	}
+
+	// 为更容易生成 HTML 错误提示而编写的辅助函数
+	function ptint_error($key, $errors){
+		if(isset($errors[$key])){
+			print "<dd class='error'>{$errors[$key]}</dd>";
+		}
+	}
+	function validate_form(){
+		global $flavors;
+
+		// 从没有错误开始
+		$errors = [];
+
+		// name 是必填 必须至少三个字符
+		if(!(isset($_POST['name']) and (srelen($_POST['name']) > 3))){
+			$errors['name'] = 'Enter a name of at least 3 letters';
+		}
+		if(isset($_POST['age']) and ($_POST['age'] != '1')){
+			$errors['age'] = 'Invalid age checkbox value';
+		}
+		// flavor 是选填的 但是提交则必须在 $flavors 中
+		if(isset($_POST['flavor']) and ! in_array($_POST['flavor'], $flavors)){
+			$errors['flavor'] = 'Choose a valid flavor';
+		}
+
+		return $errors;
+	}
+}
