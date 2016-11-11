@@ -256,4 +256,16 @@ function point_15(){
 	include_once "${version}_header"; // 加载自定义的页眉
 }
 
+
+// ----------------------------------------------------------------------------
+// 16.在 Apache 服务器内部通信
+function point_16(){
+	// 取值
+	$session = apache_note('session');
+	// 设置
+	apache_note('session', $session);
+	// 取得 session ID ,并将其添加到 Apache 的记录中
+	apache_note('session_id', session_id());
+}
+
 ?>
