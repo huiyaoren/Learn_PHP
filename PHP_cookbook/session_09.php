@@ -197,3 +197,27 @@ function point_10(){
 }
 // 避免评论中的 HTML 或 JS 导致问题
 
+
+// ----------------------------------------------------------------------------
+// 11.处理多页表单
+function point_11(){
+	// 开启 session
+	session_start();
+
+	// 确定当前的页面
+	if(($_SERVER['REQUEST_METHOD'] == 'GET') or (!isset($_POST['stage']))){
+		$stage = 1;	
+	} else{
+		$stage = (int) $_POST['stage'];
+	}
+
+	// 保存所有提交的数据
+	if($stage > 1){
+		foreach ($_POST as $key => $value){
+			$_SESSION[$key] = $value;
+		}
+	}
+}
+// 把多次提交的表单数据存入 session
+// 使上一页提交的数据在下一次请求时得到保存
+
