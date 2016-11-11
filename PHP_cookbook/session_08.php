@@ -229,6 +229,31 @@ function point_13(){
 // 14.读取环境变量
 function point_14(){
 	$name = $_ENV['USER'];
+
+	$path = getenv('PATH');
+}
+
+
+// ----------------------------------------------------------------------------
+// 15.设置环境变量
+function point_15(){
+	// 设置一个环境变量
+	putenv('ORACLE_SID=ORACLE');
+
+	// 在 Apache 配置文件中设置一个环境变量
+	// 这种方式设置的变量会出现在 $_SERVER 中而不是 $_ENV
+	SetEnv DATABASE_PASSWORD password
+
+	// 基于环境变量调整行为
+	$version = $_SERVER['SITE_VERSION'];
+	// 如果用户未正确登陆 则重定向
+	if('members' == $version){
+		if(!authenticate_user($_POST['username'], $_POST['password'])){
+			header('Location: http://guest.example.com/');
+			exit;
+		}
+	}
+	include_once "${version}_header"; // 加载自定义的页眉
 }
 
 ?>
