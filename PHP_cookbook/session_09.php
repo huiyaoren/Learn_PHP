@@ -25,5 +25,29 @@ function point_1(){}?>
 <?php } else{
 	echo 'Hello, '.$_POST['first_name'].'|';
 }
-?>
+?><?php
+
+
+// ----------------------------------------------------------------------------
+// 2.验证码表单输入：必填字段
+function point_2(){
+	if(!strlen($_POST['flavor'])){
+		print 'You must enter your favorite ice cream flavor';
+	}
+
+	// 严格的表单验证
+	// 检查是否存在 $_POST['flavor'] 是否存在
+	if(!(isset($_POST['flavor']) and strlen($_POST['flavor']))){
+		print 'You must enter your favorite ice cream flavor';
+	}
+	// $_POST['color'] 是可选的 但如果不留空就必须大于 5 个字符
+	if(isset($_POST['color']) and (strlen($_POST['color'])<=5)){
+		print 'Color must be more than 5 characters';
+	}
+	// 确保 $_POST['choices'] 存在并且是一个数组
+	if(!(isset($_POST['choices']) and is_array($_POST['choices']))){
+		print 'You must select some choices';
+	}
+}
+// 避免把 0 误认为 false 应该用 strlen 验证而不是 empty
 
