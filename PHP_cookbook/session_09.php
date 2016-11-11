@@ -182,3 +182,18 @@ function point_8(){
 		print "Sorry, that credit card expires too soon.";
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 9.验证表单输入：信用卡
+// 略
+
+
+// ----------------------------------------------------------------------------
+// 10.预防跨站点脚本
+function point_10(){
+	print 'The comment was';
+	print htmlentities($_POST['comment']);
+}
+// 避免评论中的 HTML 或 JS 导致问题
+
