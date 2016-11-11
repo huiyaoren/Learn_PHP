@@ -196,5 +196,20 @@ function point_10(){
 }
 
 
+// ----------------------------------------------------------------------------
+// 11.把输出冲刷（Flusing）到浏览器
+function point_11(){
+	print 'Finding identical snowflakes...';
+	flush();
+	$sth = $dbh->query(
+		'SELECT shape, COUNT(*) AS c FROM snowflakes GROUP BY shape HAVING c > 1'
+	)	
+}
+// PHP 的缓存机制
+// 当缓存未满或程序未计入的情况下 PHP 不会返回请求
+// flush() 在缓存为满的情况下把先前缓存内的内容发送给客户端
+
+
+
 
 ?>
