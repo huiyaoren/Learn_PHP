@@ -163,3 +163,22 @@ function point_7(){
 	}
 }
 // array_intersect() 函数用于筛选出两个数组的共同元素
+
+
+// ----------------------------------------------------------------------------
+// 8.验证表单输入：日期和时间
+function point_8(){
+	if(! checkdate($_POST['month'], $_POST['day'], $_POST['years'])){
+		print "The date you entered doesn't exist!";
+	}
+
+	// 信用卡失效月份的初始时刻
+	$expires = mktime(0, 0, 0, $_POST['month'], 1, $_POST['year']);
+	// 下个月的初始时刻
+	// 如果 date('n') + 1 == 13, mktime() 正常执行并使用
+	// 下一年的一月份
+	$nextMonth = mktime(0, 0, 0, date('n') + 1, 1);
+	if($expires < $nextMonth){
+		print "Sorry, that credit card expires too soon.";
+	}
+}
