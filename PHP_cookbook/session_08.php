@@ -316,7 +316,60 @@ _MAIL_;
 
 	// mail($email, "User Verification", $mail_body);
 	print "$email, $mail_body";
-
 }
 
-?>
+
+// ----------------------------------------------------------------------------
+// 18.编程：小型 Wiki
+function point_19(){
+	// 需要一个扩展库 PHP Markdown http://www.michelf.com/projects/php-markdown/
+	// 使用 Markdown 函数生成类 Wiki 的标签
+	require_once 'maekdown.php';
+
+	// 保存 Wiki 页的文件夹
+	// 确保 web 服务器可以写入
+	define('PAGEDIR', dirname(__FILE__). '/pages');
+
+	// 取得页面名称 或者使用默认页面
+	$page = isset($_GET['page']) ? $_GET['page'] : 'Home';
+
+	// 显示一个编辑表单、保存的表单 or 显示一个页面
+
+	// 显示请求编辑的表单
+	if(isset($_GET['edit'])){
+		pageHeader($page);
+		edit($page);
+		pageFooter($page, false);
+	}
+	// 保存编辑表单提交的内容
+	else if(isset($_POST['edit'])){
+		file_put_contens(pageToFile($_POST['page']), $_POST['contents']);
+		// 重定向到编辑过页面的常规视图
+		header('Location: http://'. $_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'].'?page='.urlencode($_POST['page']));
+		exit;
+	}
+
+	// 显示一个页面
+	else{
+		pageHeader($page);
+		// 如果页面存在 显示该页面，并在页脚中显示一个 Edit 链接
+		if(is_readable(pageToFile($page))){
+			// 从保存的文件中取得页面的内容
+			$text = file_get_contents(pageToFile($page));
+			// 转换 Markdown 语法 (使用markdown)\
+			$text = Markdown($text);
+			// 生成指向其他 wiki 页面的空链接
+			$text = wikiLinks($text);
+			// 显示这个页面
+			echo $text;
+			// 显示页脚
+			pageFooter($page, true);
+		}
+		// 如果页面不存在，显示一个编辑的表单
+		// 以及不带 Edit 链接的页脚
+		else{
+			edit($page, true);
+			pageFooter($page, false);
+		}
+	}
+}
