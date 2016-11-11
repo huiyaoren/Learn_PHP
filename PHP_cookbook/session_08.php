@@ -102,4 +102,99 @@ function point_6(){
 function point_7(){
 	$body = file_get_contents('php://input');
 }
-// 
+
+
+// ----------------------------------------------------------------------------
+// 8.生成交替样式的 HTML 表格
+function point_8(){
+	$style = ['even-row', 'odd-row'];
+	$db = new PDO('sqlite:alrow.db');
+	foreach($db->query('SELECT quantity,ingredient FROM ingredients') as $i=>$row){
+	// <tr class="<?php echo $style[$i%2];">
+	// 	<td></td>
+	// 	<td></td>
+	// </tr>
+	// </table>
+	}
+}
+
+
+// ----------------------------------------------------------------------------
+// 9.使用 HTTP 的基本或摘要认证
+function point_9(){
+	header('WWW-Authienticate: Basic realm="My Website"');
+	header('HTTP/1.0 401 Unauthorized');
+	echo "You need to enter a valid username and password";
+	exit();
+}
+function pc_validate($user, $pass){
+	// 可用检查一个数据库替换
+	$users = [
+		'david'=>'asdf',
+		'adam'=>'sdf'
+	];
+	if(isset($users['$user']) and ($users[$user] == $pass)){
+		return true;
+	}else{
+		return false;
+	}
+}
+// 全局变量 $SERVER['PHP_AUTH_USER'] $_SERVER['PHP_AUTH_PW'] 包含用户提供的用户名和密码
+// 当浏览器收到 401 头部信息时 会弹出一个要求输入用户名和密码的对话框
+// 然而并没有测试成功
+
+
+// ----------------------------------------------------------------------------
+// 10.使用 Cookie 认证
+function point_10(){
+	// 使用 Cookie 认证
+	$secret_word = 'if i ate spinach';
+	if(pc_validate($_POST['username'], $_POST['password'])){
+		setcookie(
+			'login',
+			$_POST['username'].','.md5($_POST['username'].$secret_word)
+		);
+	}
+
+	// 验证登陆 Cookie
+	unset($username);
+	if($_COOKIE['login']){
+		list($c_username, $cookie_hash) = splite(',',$_COOKIE['login']);
+		if(md5($c_username.$secret_word) == $cookie_hash){
+			$username = $c_username;
+		} else{
+			print "You have sent a bad cookie.";
+		}
+	}
+	if($username){
+		print "Welcome , $username";
+	} else{
+		print "Welcome, anoymous user";
+	}
+
+	// 在 session 中保存登陆信息
+	if(pc_validate($_POST['username'], $_POST['password'])){
+		$_SESSION['login'] = $_POST['username'].','.md5($_POST['username'].$secret_word);
+	}
+
+	// 验证 session 信息
+	if(isset($_SESSION['login'])){
+		list($c_username, $cookie_hash) = explode(',', $_SESSION['login']);
+		if(md5($c_username.$secret_word) == $cookie_hash){
+			$username = $c_username;
+		}else{
+			print "You have tampered with your session";
+		}
+	}
+
+	// 连接注销和登陆的使用
+	if(pc_validate($_POST['username'], $_POST['password'])){
+		$_SESSION['login'] = $_POST['username'].','.md5($_POST['username'].$secret_word);
+		error_log('Session id'. session_id().' log in as '. $_REQUEST['username']);
+		// 会向错误日志中加入一条信息
+	}
+}
+
+
+
+?>
