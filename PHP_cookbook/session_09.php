@@ -292,6 +292,16 @@ function point_13(){
 		$db = new PDO('sqlite:/tmp/formjs.db');
 		$db->beginTransaction();
 		$sth = $db->prepare('SELECT * FROM forms WHERE token =?');
+		$sth->execute([$_POST['token']]);
+		if(count($sth->fetchAll())){
+			ptint "This form has already been submitted";
+			$db->rollBack();
+		} else{
+			$sth = $db->prepare('INSERT INTO forms (token) VALUES (?)');
+			$sth->execute([$_POST['token']]);
+			$db->commit();
+			ptint "The form is submitted successfully";
+		}
 	}
 }
 
