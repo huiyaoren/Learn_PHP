@@ -313,5 +313,14 @@ function point_13(){
 // ----------------------------------------------------------------------------
 // 14.处理上传文件
 function point_14(){
-
+	if (isset($_FILES['document']) and ($_FILES['document']['error'] == UPLOAD_ERR_OK)){
+		$newPath = '/tmp/'.basename($_FILES['document']['name']);
+		if(move_uploaded_file($_FILES['document']['tmp_name'], $newPath)){
+			print "File saved in $newPath";
+		} else {
+			print "Couldn't move file to $newPath";
+		}
+	} else {
+		print "No valid file upload";
+	}
 }
