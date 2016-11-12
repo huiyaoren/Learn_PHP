@@ -280,7 +280,24 @@ function point_12(){
 		if(isset($_POST['flavor']) and ! in_array($_POST['flavor'], $flavors)){
 			$errors['flavor'] = 'Choose a valid flavor';
 		}
-
 		return $errors;
 	}
+}
+
+
+// ----------------------------------------------------------------------------
+// 13.防止多次提交同一表单
+function point_13(){
+	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		$db = new PDO('sqlite:/tmp/formjs.db');
+		$db->beginTransaction();
+		$sth = $db->prepare('SELECT * FROM forms WHERE token =?');
+	}
+}
+
+
+// ----------------------------------------------------------------------------
+// 14.处理上传文件
+function point_14(){
+
 }
