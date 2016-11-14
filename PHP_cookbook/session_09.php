@@ -347,3 +347,17 @@ function point_16(){
 function point_17(){
 	// 把 [] 放在表单元素名字的末尾 告诉 PHP 把数据保存到一个数组中
 }
+
+
+// ----------------------------------------------------------------------------
+// 18.基于当前日期创建下拉菜单
+function point_18(){
+	// 生成基于日期的下拉菜单项目
+	list($hour, $minute, $second, $month, $day, $year) = split (':', date('h:i:s:m:d:Y'));
+	// 输出对应于一个星期中每一天的选项
+	for($i = 0; $i < 7; ++$i){
+		$timestamp = mktime($hour, $minute, $second, $month, $day + $i, $year);
+		$date = date("D, F j, Y", $timestamp);
+		print "<option value='$timestamp'>$date</option>";
+	} 
+}
