@@ -93,3 +93,14 @@ function point_4(){
 		print "{$row['symbol']} goes with {$row['planet']} <br/>\n";
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 5.不通过循环抽取记录
+function point_5(){
+	$st = $db->query('SELECT planet, element FROM zodiac');
+	$results = $st->fetchAll();
+	foreach ($results as $i => $result) {
+		print "Planet $i is {$result['planet']} <br/>\n";
+	}
+}
