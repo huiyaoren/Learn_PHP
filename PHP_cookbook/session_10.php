@@ -66,3 +66,20 @@ _SQL_;
 		$db->rollback();
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 3.连接到 SQL 数据库
+function point_3(){
+	// MySQL 希望在字符串中嵌入参数
+	$mysql = new PDO('mysql:host=db.example.com', $user, $password);
+	// 用 ; 分隔多个参数
+	$mysql = new PDO('mysql:host=db.example.com;port=31075;dbname=food', $user, $password);
+	// 连接到本地 Mysql 服务器
+	$mysql = new PDO('mysql:unix_socket=/tmp/mysql.sock', $user, $password);
+
+	// postgreSQL
+	// Oracle
+	// Sybase
+	// ODBC
+}
