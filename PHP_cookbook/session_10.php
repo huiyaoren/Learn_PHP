@@ -31,3 +31,38 @@ function point_1(){
 
 	dba_close($dbh);
 }
+
+
+// ----------------------------------------------------------------------------
+// 2.使用 SQLite 数据库
+function point_2(){
+	$db = new PDO('sqlite:/usr/local/zodiac');
+
+	// 创建表并自动插入数据
+	$db->beginTransaction();
+	// 试着查找名为 zodiac 的表
+	$q = $db->query("SELECT name FROM sqlite_master WHERE type = 'table'"."AND name='zodiac'");
+	// 如果查询中没有返回结果行 就创建这个表并插入数据
+	if($q->fetch() === false){
+		$db->exec(<<<_SQL_
+			CREATE TABLE zodiac (
+				id INT UNSIGNED NOT NULL
+			)
+_SQL_;
+			);
+		// 独立的 SQL 语句
+		$sql = <<<_SQL_
+		INSERT INTO zodiac VALUS (2);
+		INSERT INTO zodiac VALUS (3);
+_SQL_;
+
+		// 将 SQL 语句按行分割并逐一执行
+		foreach(explode("\n", trim($sql)) as $q){
+			$db->exec(trim($q));
+		}
+		$db->commit();
+	} else {
+		// 结束事务
+		$db->rollback();
+	}
+}
