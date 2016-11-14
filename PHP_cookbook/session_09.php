@@ -324,3 +324,11 @@ function point_14(){
 		print "No valid file upload";
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 15.防止全局变量注射
+function point_15(){
+	// 禁用 php.ini 中 register_globals = off
+	// 只从数组 $_GET $_POST $_COOKIE 中访问有关变量
+}
