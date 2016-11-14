@@ -104,3 +104,14 @@ function point_5(){
 		print "Planet $i is {$result['planet']} <br/>\n";
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 6.修改 SQL 数据库中的数据
+function point_6(){
+	$db->exec("INSERT INTO family (id, name) VALUES(1, 'vito')");
+	$db->exec("DELETE FROM family WHERE name LIKE 'Fredo'");
+	$db->exec("UPDATE family SET is_naive = 1 WHERE name LIKE 'Kay'");
+	$st = $db->prepare('INSERT INTO family (id,name) VALUES (?,?)');
+	$st->execute([1, 'Fredo']);
+}
