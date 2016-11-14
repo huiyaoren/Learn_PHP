@@ -83,3 +83,13 @@ function point_3(){
 	// Sybase
 	// ODBC
 }
+
+
+// ----------------------------------------------------------------------------
+// 4.查询一个 SQL 数据库
+function point_4(){
+	$st = $db->query('SELECT symbol, planet FROM zodiac', PDO::FETCH_BOUND);
+	foreach($st->fetchAll() as $row){
+		print "{$row['symbol']} goes with {$row['planet']} <br/>\n";
+	}
+}
