@@ -172,3 +172,19 @@ function point_9(){
 	$st = $db->prepare('UPDATE orchard SET trees = trees - 1 WHERE fruit = ?');
 	$st->execute([$fruit]);
 }
+
+
+// ----------------------------------------------------------------------------
+// 10.记录调试信息和错误
+function point_10(){
+	// 操作失败后使用 PDO::errorCode() PDOStatement::errorCode() 获得相应错误代码
+	// 对应的 errorInfo() 方法则会返回关于错误的更多信息
+
+	// 输出错误信息
+	$st = $db->prepare('SELECT * FROM imaginary_table');
+	if(! $st){
+		$error = $db->errorInfo();
+		print "Problem ({$error[2]})";
+	}
+
+}
