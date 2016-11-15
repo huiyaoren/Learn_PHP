@@ -115,3 +115,29 @@ function point_6(){
 	$st = $db->prepare('INSERT INTO family (id,name) VALUES (?,?)');
 	$st->execute([1, 'Fredo']);
 }
+
+
+// ----------------------------------------------------------------------------
+// 7.有效地重复查询
+function point_7(){
+	// 准备
+	$st = $db->prepare("SELECT sign FROM zodiac WHERE element LIKE ?");
+	// 执行一次
+	$st = execute(['fire']);
+	while($row = $st->fetch()){
+		print $row[0]."<br/>\n";
+	}
+	// 在执行一次
+	$st->execute(['water']);
+	while ($row = $st->fetch()){
+		print $row[0]. "<br/> \n";
+	}
+
+	// 使用命名的占位符
+	$st =  $db->prepare(
+		"SELECT sign FROM zodiac WHERE element LIKE :element OR planet LIKE :planet"
+	);
+	$st->execute(['planet'=>'Mars', 'element'=>'earth']);
+	$row = $st->fetch();
+	// 也可以通过 binkParam() 函数绑定参数
+}
