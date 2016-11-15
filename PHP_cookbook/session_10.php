@@ -141,3 +141,17 @@ function point_7(){
 	$row = $st->fetch();
 	// 也可以通过 binkParam() 函数绑定参数
 }
+
+
+// ----------------------------------------------------------------------------
+// 8.确定查询返回的行数
+function point_8(){
+	// PDO::exec() 发送 INSERT UPDATE DELETE 时 exec() 方法的返回找就是被更新的行数
+	// PDO::prepare() 和 PDOStatement::execute() 来发送时通过 PDOStatement::rowCount() 来获取
+	$st = $db->prepare('DELETE FROM family WHERE name LIKE ?');
+	$st->execute(['Fredo']);
+	print "Deleted rows:". $st->rowCount();
+	$st->execute(['Sonny']);
+	print "Deleted rows:". $st->rowCount();
+}
+// 并非所有数据库会提供 rowCount() 信息 不应该过度依赖这一特性
