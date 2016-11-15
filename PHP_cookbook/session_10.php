@@ -155,3 +155,20 @@ function point_8(){
 	print "Deleted rows:". $st->rowCount();
 }
 // 并非所有数据库会提供 rowCount() 信息 不应该过度依赖这一特性
+
+
+// ----------------------------------------------------------------------------
+// 9.转义引号
+function point_9(){
+	$safe = $db->quote($_GET['searchTerm']);
+	$sate = strstr($sate, ['_'=>'\_',  '%'=>'\%']);
+	$st = $db->query("SELECT * zodiac WHERE planet LIKE $safe");
+
+	// 检查魔术引号
+	// magic_quotes_sybase 的行为也是一个影响因素
+	if(get_magic_quotes_gpc() and (! ini_get('magic_quotes_sybase'))){
+		$fruit = $_GET['fruit'];
+	}
+	$st = $db->prepare('UPDATE orchard SET trees = trees - 1 WHERE fruit = ?');
+	$st->execute([$fruit]);
+}
