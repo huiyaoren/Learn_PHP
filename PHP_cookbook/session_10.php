@@ -230,3 +230,47 @@ function point_13(){
 		// 对每条记录进行处理
 	}
 }
+
+
+// ----------------------------------------------------------------------------
+// 14.缓存查询和结果
+function point_14(){
+	require_once 'Cache/Lite.php';
+
+	$opts = [
+		// 把缓存的数据放在何处
+		'cacheDir' => 'c:/tmp',
+		// 我们在缓存中保存数组
+		'automaticDerialization' => true,
+		// 缓存中的信息保存多长时间
+		'lifeTime'=>600 /* 10分钟 */
+	];
+
+	// 创建缓存
+	$cache = new Cache_Lite($opts);
+	// 连接到数据库
+	$db = new PDO('sqlote:c:/date/zodiac.db');
+	// 定义查询及其参数
+	$sql = 'SELECT * FROM zodiac WHERE planet = ?';
+	$params = [$_GET['planet']];
+	// 取得唯一的缓存键
+	$key = cache_key($sql, $params);
+	// 尝试从缓存中取得结果
+	$results = $cache->get($key);
+	if($results === false){
+		// 没找到结果， 那么执行查询结果并将结果放入缓存中
+		$st = $db->prepare($sql);
+		$st->execute($params);
+		$results = $st->fetchAll();
+		$cache->save($results);
+	}
+	// 无论是否取自缓存 $results 中都保存我们的数据
+	foreach ($results as $result) {
+		ptint "$result[id]: $result[planet], $result[sign] <br/>\n";
+	}
+
+	function cache_key($sql, $params){
+		return md5($sql.implode('|', array_keys($params)).implode('|', $params));
+	}
+}
+// cache_key() 函数大小写敏感
