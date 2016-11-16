@@ -310,3 +310,26 @@ class DBCxn{
 // 2.防止你的程序创建第二个连接
 
 // 处理对多个数据库的链接
+
+
+// ----------------------------------------------------------------------------
+// 16.编程：储存链式（Threaded）留言板
+// message.php
+$board = new MessageBoard();
+$board->go();
+
+class MessageBoard{
+	protected $db;
+	protected $form_errors = [];
+	protected $inTransaction = false;
+
+	public function __construct(){
+		set_exeception_handler([$this, 'logAndDie']);
+		$this->db = new PDO('sqlite:/usr/local/data/message.db');
+		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	}
+
+	public function go(){
+		// $REQUEST['cmd'] 值告诉我们做什么
+	}
+}
