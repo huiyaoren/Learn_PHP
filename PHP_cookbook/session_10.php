@@ -274,3 +274,39 @@ function point_14(){
 	}
 }
 // cache_key() 函数大小写敏感
+
+
+// ----------------------------------------------------------------------------
+// 15.在程序中任何地方都能访问数据库连接
+function point_15(){
+}
+
+// 用一个静态类方法创建一个数据库连接
+class DBCxn{
+	// 要连接到那个 DSN
+	public static $dsn = 'sqlite:c:/data/zodiac.db';
+	public static $user = null;
+	public static $pass = null;
+	public static $driverOpts = null;
+
+	// 保存连接的内部变量
+	private static $db;
+	// 不允许克隆或实例化
+	final private function __construct(){
+	}
+	final private function __clone(){
+	}
+	public static function get(){
+		// 如果不存在连接 则进行连接
+		if(is_null(self::$db)){
+			self::$db = new PDO(self::$dsn, self::$user, self::$pass, self::$driverOpts);
+		}
+		// 返回连接 
+		return self::$db;
+	}
+}
+// ::get() 方法
+// 1.使程序在任何地方访问 而不用担心变量作用域的问题
+// 2.防止你的程序创建第二个连接
+
+// 处理对多个数据库的链接
