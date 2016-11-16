@@ -188,3 +188,13 @@ function point_10(){
 	}
 
 }
+
+
+// ----------------------------------------------------------------------------
+// 11.创建唯一的标识符
+function point_11(){
+	$st = $db->perpare('INSERT INTO users (id, name) VALUS(?, ?)');
+	$st->execute([uniqid(), 'Jacob']);
+	$st->execute([md5(uniqid()), 'Ruby']);	
+}
+// 也可以使用 autoincrement
