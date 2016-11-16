@@ -219,3 +219,14 @@ function point_12(){
 	// 执行查询
 	$st->execute($update_values);
 }
+
+
+// ----------------------------------------------------------------------------
+// 13.为连续的记录生成分页链接
+function point_13(){
+	// 通过 SQLite 实现分页
+	// 从第 3 行开始 选择 5 行
+	foreach ($db->query('SELECT * FROM zodiac'.'ORDER BY sign LIMIT 5'.'OFFSET 3') as $row) {
+		// 对每条记录进行处理
+	}
+}
