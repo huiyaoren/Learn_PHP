@@ -198,3 +198,24 @@ function point_11(){
 	$st->execute([md5(uniqid()), 'Ruby']);	
 }
 // 也可以使用 autoincrement
+
+
+// ----------------------------------------------------------------------------
+// 12.以程序化的方式建立查询
+function point_12(){
+	// 一个字段名列表
+	$fields = ['symbol', 'planet', 'element'];
+
+	$update_fields = [];
+	$update_values = [];
+	foreach ($fields as $field) {
+		$update_values[] = "field = ?";
+		// 假定数据来自表单
+		$update_values[] = $_POST[$field];
+	}
+	$st = $db->prepare("UPDATE zodiac SET". implode(',', $update_fields).'WHERE sign = ?');
+	// 把 'sign' 的值添加到值数组中
+	$update_values[] = $_GET['sign'];
+	// 执行查询
+	$st->execute($update_values);
+}
