@@ -59,3 +59,22 @@ function point_3(){
 //		sessionID 频繁改变 攻击者难有时机获取有效的 sessionID
 // 2.session 行为设置只能使用 cookie
 // 		session.use_only_cookie 设置 不会有 cookie 留在浏览器的历史记录和服务器中
+
+
+// ----------------------------------------------------------------------------
+// 4.在数据库中保持 session
+function point_4(){
+	// 使用 PEAR 的 Http_session 包就可以方便地实现在数据库中储存 session
+	require_once 'HTTP/Session/Container/DB.php';
+
+	$s = new HTTP_Session_Container_DB('mysql://user:password@localhost/db');
+	ini_get('session.auto_start') or session_start();
+}
+
+
+// ----------------------------------------------------------------------------
+// 5.在共享内存中保存 session
+function point_5(){
+	$s = new pc_Shm_Session();
+	ini_get('session.auto_start') or session_start();
+}
