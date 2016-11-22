@@ -94,3 +94,22 @@ function point_6(){
 }
 // 如果 Web 服务器的磁盘 I/O 繁忙时 shmop 函数实现高性能信息存储和检索十分有意义
 // 默认情况下 pc_Shm 类为每个值分配了 16kb 的空间
+
+
+// ----------------------------------------------------------------------------
+// 7.在摘要表中缓存计算结果
+function point_7(){
+	$st = $db->prepare('SELECT COUNT(*) FROM searchsummary WHERE sdate = ?');
+	$st->execute(array(date('Y-m-d', strtotime('yesterday'))));
+	$row = $st->fetch();
+
+	// 缓存中没有匹配的信息
+	if($row[0] == 0){
+		$st2 = $db->prepare('SELECT searchterm, source, FROM_DAYS(TO_DAYS(dt)) AS sdate, COUNT(*) as searches WHERE TO_DAYS(dt)  = ?');
+		$st2->execute(array(date('Y-m-d', strtotime('yesterday'))));
+		$stInsert = $db->prepare('INSERT INTO searchsummary (searchterm, source, sdate, searches) VALUES (?,?,?,?)');
+		while($row->fetch(PDO::FETCH_NUM)){
+			$stInsert->execute($row);
+		}
+	}
+}
