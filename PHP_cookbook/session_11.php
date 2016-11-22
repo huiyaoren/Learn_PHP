@@ -78,3 +78,19 @@ function point_5(){
 	$s = new pc_Shm_Session();
 	ini_get('session.auto_start') or session_start();
 }
+
+
+// ----------------------------------------------------------------------------
+// 6.在共享内存中保存独立数据
+function point_6(){
+	// 存
+	$shm = new pc_Shm();
+	$secret_code = 'land shark';
+	$shm->save('mysecret', $secret_code);
+
+	// 取
+	$shm = new pc_Shm();
+	print $shm->fetch('mysecret');
+}
+// 如果 Web 服务器的磁盘 I/O 繁忙时 shmop 函数实现高性能信息存储和检索十分有意义
+// 默认情况下 pc_Shm 类为每个值分配了 16kb 的空间
