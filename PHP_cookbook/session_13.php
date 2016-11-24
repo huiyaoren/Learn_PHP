@@ -37,3 +37,22 @@ function  point_2(){
 	$page = curl_exec($c);
 	curl_close($c);
 }
+
+
+// ----------------------------------------------------------------------------
+// 3.通过 Cookie 定位 URL
+function point_3(){
+	// 通过 cURL 发送 cookie
+	$c = curl_init('http://www.example.com/needs-cookies.php');
+	curl_setopt($c, CURLOPT_COOKIE, 'user=ellen; activity=swimming');
+	curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+	$page = curl_exec($c);
+	curl_close($c);
+
+	// 通过 HTTP_Request 发送 cookie
+	require 'HTTP/Request.php';
+	$r = new HTTP_Request('http://www.example.com/needs-cookies.php');
+	$r->addHeader('Cookie', 'user=ellen; activity=swimming');
+	$r->dendRequst();
+	$page = $r->getResponseBody();
+}
