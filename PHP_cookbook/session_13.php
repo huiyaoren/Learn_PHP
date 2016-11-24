@@ -56,3 +56,32 @@ function point_3(){
 	$r->dendRequst();
 	$page = $r->getResponseBody();
 }
+
+
+// ----------------------------------------------------------------------------
+// 4.通过任意头部信息定位 URL
+function point_4(){
+	// 通过 http 流来发送头部信息
+	$url = 'http://www.example.com/special-header.php';
+	$header = "X-Factor: 12\r\nMy-Header: Bob";
+	$options = array('header' => $header);
+	// 创建流环境
+	$context = stream_context_create(array('http'=>$options));
+	// 把环境传递给 file_get_contents($url, false, $context);
+	print file_get_contents($url, false, $context);
+
+	// 通过 cURL 来发送头部信息
+	$c = curl_init('http://www.example.com/special-header.php');
+	curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($c, CURLOPT_HTTPHEADER, array('X-Factor: 12', 'My-Header:Bob'));
+	$page = curl_exec($c);
+	curl_close($c);
+
+	// 通过 HTTP_Request 发送头部信息
+	require 'HTTP/Request.php';
+	$r = new HTTP_Request('http://www.example.com/special-header.php');
+	$r->addHeader('X-Factor', 12);
+	$r->addHeader('My-Header', 'Bob');
+	$r->sendRequest();
+	$page = $r->getResponseBody();
+}
