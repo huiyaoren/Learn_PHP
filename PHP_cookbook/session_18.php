@@ -31,3 +31,24 @@ function point_2()
     }
 }
 
+
+// ----------------------------------------------------------------------------
+// 3.确保过滤输出
+function point_3()
+{
+    // 初始化一个空数组 证实数据合法之后 将数据储存在这个数组中
+    $filters = [
+        'name' => [
+            'filter' => FILTER_VALIDATE_REGEXP,
+            'options' => ['regexp' => '/^[a-z]+$/i'],
+        ],
+        'age' => [
+            'filter' => FILTER_VALIDATE_INT,
+            'options' => ['min_range' => 13],
+        ],
+    ];
+
+    // 将 $clean 初始化为一个空数组 可以确保必须显式地增加数据
+    $clean = filter_input_array(INPUT_POST, $filters);
+}
+
