@@ -52,3 +52,21 @@ function point_3()
     $clean = filter_input_array(INPUT_POST, $filters);
 }
 
+
+// ----------------------------------------------------------------------------
+// 4.避免跨站点脚本攻击
+function point_4()
+{
+    // 用 htmlentities() 对所有 HTML 输出转义, 一定要指定正确的字符编码
+
+    /* 指示字符编码 */
+    header('Content-Type: text/html; charset=UTF-8');
+
+    /* 为转义的数据初始化一个数组 */
+    $html = [];
+
+    /* 转义过滤的数据 */
+    $html['username'] = htmlentities($clean['username'], ENT_QUOTES, 'UTF-8');
+    echo "<p>Welcome back, {$html['username']}.</p>";
+}
+
