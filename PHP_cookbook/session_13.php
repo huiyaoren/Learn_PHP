@@ -8,7 +8,7 @@ if($_GET['a']) $_GET['a']();
 // 1.通过 GET 方法定位 URL
 function point_1(){
 	// 用 file_get_contents() 取得 url 的内容
-	$page = file_contents('http://www.example.com/robots.txt');
+	$page = file_get_contents('http://www.example.com/robots.txt');
 }
 // file_get_contents() 必须要启用 allow_fopen_configuration
 
