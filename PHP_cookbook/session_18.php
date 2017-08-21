@@ -70,3 +70,15 @@ function point_4()
     echo "<p>Welcome back, {$html['username']}.</p>";
 }
 
+
+// ----------------------------------------------------------------------------
+// 5.消除 SQL 注入
+function point_5()
+{
+    // 使用一个处理数据库的库 如 PDO 对数据库完成适当的转义
+    $statement = $db->prepare("INSERT INTO users (username, password) VALUE (:username, :password)");
+    $statemetn->bindParam(':username', $clean['username']);
+    $statement->bindParam(':password'. $clean['password']);
+    $statement->execute();
+}
+
